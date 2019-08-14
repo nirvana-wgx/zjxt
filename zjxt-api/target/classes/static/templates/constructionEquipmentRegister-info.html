@@ -1,0 +1,85 @@
+<ion-view view-title="施工机具/仪表登记" class="create-by bc-bg app">
+  <!-- <ion-header-bar>
+    <div class="buttons"  ng-click="toClose()">
+        <button class="button button-icon icon ion-ios-arrow-back"></button>
+    </div>
+    <h1 class="title text-title">施工机具/仪表登记</h1>
+ 
+  </ion-header-bar> -->
+  <ion-content>
+   <div class="list-info">
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+          <div class="title">设备编号</div>
+          <div class="text-f umar-l">{{info.code}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">设备型号</div>
+        <div class="text-f umar-l">{{info.model}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">设备名称</div>
+        <div class="text-f umar-l">{{info.name}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">出厂编号</div>
+        <div class="text-f umar-l">{{info.factorynumber}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">生产厂家</div>
+        <div class="text-f umar-l">{{info.manufacturer}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">出生日期</div>
+        <div class="text-f umar-l">{{info.manufacturerdate | dateTime}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">是否特种设备</div>
+        <div class="text-f umar-l">{{info.ists}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">检验日期</div>
+        <div class="text-f umar-l">{{info.passdate | dateTime}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">备案编号</div>
+        <div class="text-f umar-l">{{info.recordnumber}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">已使用年限</div>
+        <div class="text-f umar-l">{{info.usedyears}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">备注</div>
+        <div class="text-f umar-l">{{info.remark}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">附件</div>
+        <div class="text-f umar-l">{{info.attach}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">分包商</div>
+        <div class="text-f umar-l">{{info.subcontractorname}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">项目</div>
+        <div class="text-f umar-l">{{info.projectinfoname}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">确认状态</div>
+        <div class="text-f umar-l">{{info.confirmstate }}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">驳回原因</div>
+        <div class="text-f umar-l">{{info.reason}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">确认人</div>
+        <div class="text-f umar-l">{{info.confirmusername}}</div>
+      </div>
+      <div class="ub ub-ac ub-pj bc-border ubb detail-box">
+        <div class="title">确认时间</div>
+        <div class="text-f umar-l">{{info.confirmdate  | dateTime}}</div>
+      </div>
+   </div>
+  </ion-content>
+</ion-view>

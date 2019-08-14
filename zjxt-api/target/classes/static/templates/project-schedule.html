@@ -1,0 +1,55 @@
+<ion-view view-title="{{title}}" class="create-by bc-bg scene">
+    <ion-header-bar>
+        <div class="buttons"  ng-click="toClose()">
+            <button class="icon ion-chevron-left"></button>
+        </div>
+        <h1 class="title text-title">{{title}}</h1>
+    </ion-header-bar>
+    <ion-content class="bc-bg-gray">
+        <ion-spinner class="firstLoad" ng-if="nltip==0" icon="ios"></ion-spinner>
+        <ion-refresher
+                pulling-text="下拉"
+                refreshing-text="刷新中..."
+                spinner="ios"
+                on-refresh="doRefreshScenePhotoList()">
+        </ion-refresher>
+        <div class="scene-detail-list">
+            <div class="scene-detail-box bc-border ubb"  ng-repeat="scenePhoto in scenePhotoList" ng-click="jumpDetail(scenePhoto)" > 
+               <div class="ub ub-ac ub-pj">
+                    <div class="title">
+                    <span ng-if="scenePhoto.subSectionName">【{{scenePhoto.subSectionName}}】</span>
+                        {{scenePhoto.processName}}
+                        <span ng-if="scenePhoto.finishWeight" class="num ">{{scenePhoto.finishWeight}}%</span>
+                        <span ng-if="!scenePhoto.finishWeight" class="num ">0%</span>
+                    </div>
+                    <li class="icon ion-chevron-right" ></li>
+               </div>
+
+                <div class="supplierName"> 子项目名称:{{scenePhoto.subProjectName}}</div>
+                <div class="min-img ub ub-ac ub-pc" ng-repeat="img in scenePhoto.attach">
+                    <img   actual-src="{{img | downImg}}" />
+                </div>
+                <div class="info-box ub ub-ac ub-pj">
+                    <div class="left-info">
+                        <div class="user-box ub ub-ac">
+                            <div class="user-icon"></div>
+                            <div class="text umar-l">{{scenePhoto.createUser}}</div>
+                            <span class="detail-text">{{scenePhoto.createDate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="more" ng-if="nltip==1">没有更多数据</p>
+        <ion-infinite-scroll
+        ng-if="showScroll"
+        spinner="ios"
+        on-infinite="loadMoreScenePhotoList()"
+        immediate-check="false"
+        distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="add-box" ng-click="jumpAdd()">
+        <i class="icon ion-plus-circled"></i>
+    </div>
+</ion-view>

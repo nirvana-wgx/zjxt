@@ -1,0 +1,208 @@
+<ion-view view-title="现场拍照详情" class="create-by bc-bg scene">
+    <ion-header-bar>
+        <div class="buttons"  ng-click="toClose()">
+            <button class="icon ion-chevron-left"></button>
+        </div>
+        <h1 class="title text-title">{{title}}</h1>
+    </ion-header-bar>
+    <ion-content class="bc-bg-gray">
+        <ion-spinner class="firstLoad" ng-if="nltip==0" icon="ios"></ion-spinner>
+        <ion-refresher
+                pulling-text="下拉"
+                refreshing-text="刷新中..."
+                spinner="ios"
+                on-refresh="doRefreshScenePhotoList()">
+        </ion-refresher>
+        <div class="scene-detail-list">
+            <div class="scene-detail-box bc-border ubb"  ng-repeat="scenePhoto in scenePhotoList" >
+                <div class="title">{{scenePhoto.explain}}</div>
+                <div class="pictures-box" ng-if="scenePhoto.scenePhoto.length==1">
+                    <div class="pictures-img ub ub-ac ub-pc" ng-repeat="img in scenePhoto.scenePhoto">
+                        <img   actual-src="{{img|downImg}}"  ng-click="viewMultiPic($index,scenePhoto.scenePhoto)"  />
+                    </div>
+                </div>
+                <div class="pictures-box"  ng-if="scenePhoto.scenePhoto.length==2">
+                    <div class="pictures2-img ub ub-ac ub-pc" ng-repeat="img in scenePhoto.scenePhoto" >
+                            <img actual-src="{{img|downImg}}"  ng-click="viewMultiPic($index,scenePhoto.scenePhoto)" />
+                    </div>
+                    
+                </div>
+                <div class="pictures-box"  ng-if="scenePhoto.scenePhoto.length>=3">
+                    <div class="pictures3-img ub ub-ac ub-pc"  ng-repeat="img in scenePhoto.scenePhoto">
+                        <img actual-src="{{img|downImg}}" ng-click="viewMultiPic($index,scenePhoto.scenePhoto)" />
+                    </div>
+                </div>
+                <div class="info-box ub ub-ac ub-pj">
+                    <div class="left-info">
+                        <div class="user-box ub ub-ac">
+                            <div class="user-icon"></div>
+                            <div class="text umar-l">{{scenePhoto.createUser}}</div>
+                            <span class="detail-text">{{scenePhoto.createDate}}</span>
+                        </div>
+                    </div>
+                    <div class="right-info">
+                        <div class="ub ub-ac ub-pj">
+                            <div class="construction-box ub ub-ac">
+                                <div class="construction-icon"></div>
+                                <div class="text umar-l">{{scenePhoto.photoCategory}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="more" ng-if="nltip==1">没有更多数据</p>
+        <ion-infinite-scroll
+        ng-if="showScroll"
+        spinner="ios"
+        on-infinite="loadMoreScenePhotoList()"
+        immediate-check="false"
+        distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="add-box" ng-click="jumpAdd()">
+        <i class="icon ion-plus-circled"></i>
+    </div>
+</ion-view>
+<!-- <div class="scene-detail-list">
+        <div class="scene-detail-box bc-border ubb">
+            <div class="title">涟钢280㎡烧结总承包工程工作正在顺利进行市委书记及有关领导亲临视察</div>
+            <div class="pictures-box">
+                <div class="pictures-img ub ub-ac ub-pc">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+            </div>
+            <div class="info-box ub ub-ac ub-pj">
+                <div class="left-info">
+                    <div class="user-box ub ub-ac">
+                        <div class="user-icon"></div>
+                        <div class="text umar-l">张松</div>
+                        <span class="detail-text">3小时</span>
+                    </div>
+                </div>
+                <div class="right-info">
+                        <div class="ub ub-ac ub-pj">
+                            <div class="construction-box ub ub-ac">
+                                <div class="construction-icon"></div>
+                                <div class="text umar-l">建筑</div>
+                            </div>
+                            <div class="address-box ub ub-ac">
+                                <div class="address-icon "></div>
+                                <div class="text umar-l">中国&nbsp;&nbsp;长沙</div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scene-detail-list">
+        <div class="scene-detail-box bc-border ubb">
+            <div class="title">涟钢280㎡烧结总承包工程工作正在顺利进行市委书记及有关领导亲临视察</div>
+            <div class="pictures-box">
+                <div class="pictures2-img ub ub-ac ub-pc">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+                <div class="pictures2-img ub ub-ac ub-pc" style="margin-left: 2%">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+            </div>
+            <div class="info-box ub ub-ac ub-pj">
+                <div class="left-info">
+                    <div class="user-box ub ub-ac">
+                        <div class="user-icon"></div>
+                        <div class="text umar-l">张松</div>
+                        <span class="detail-text">3小时</span>
+                    </div>
+                </div>
+                <div class="right-info">
+                    <div class="ub ub-ac ub-pj">
+                        <div class="construction-box ub ub-ac">
+                            <div class="construction-icon"></div>
+                            <div class="text umar-l">建筑</div>
+                        </div>
+                        <div class="address-box ub ub-ac">
+                            <div class="address-icon "></div>
+                            <div class="text umar-l">中国&nbsp;&nbsp;长沙</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scene-detail-list">
+        <div class="scene-detail-box bc-border ubb">
+            <div class="title">涟钢280㎡烧结总承包工程工作正在顺利进行市委书记及有关领导亲临视察</div>
+            <div class="pictures-box">
+                <div class="pictures3-img ub ub-ac ub-pc">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+                <div class="pictures3-img ub ub-ac ub-pc" style="margin-left: 2%">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+                <div class="pictures3-img ub ub-ac ub-pc" style="margin-left: 2%">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+            </div>
+            <div class="info-box ub ub-ac ub-pj">
+                <div class="left-info">
+                    <div class="user-box ub ub-ac">
+                        <div class="user-icon"></div>
+                        <div class="text umar-l">张松</div>
+                        <span class="detail-text">3小时</span>
+                    </div>
+                </div>
+                <div class="right-info">
+                    <div class="ub ub-ac ub-pj">
+                        <div class="construction-box ub ub-ac">
+                            <div class="construction-icon"></div>
+                            <div class="text umar-l">建筑</div>
+                        </div>
+                        <div class="address-box ub ub-ac">
+                            <div class="address-icon "></div>
+                            <div class="text umar-l">中国&nbsp;&nbsp;长沙</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scene-detail-list">
+        <div class="scene-detail-box bc-border ubb">
+            <div class="title">涟钢280㎡烧结总承包工程工作正在顺利进行市委书记及有关领导亲临视察</div>
+            <div class="pictures-box">
+                <div class="pictures3-img ub ub-ac ub-pc">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+                <div class="pictures3-img ub ub-ac ub-pc" style="margin-left: 2%">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+                <div class="pictures3-img ub ub-ac ub-pc" style="margin-left: 2%">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+                <div class="pictures3-img ub ub-ac ub-pc">
+                    <img  actual-src="./images/scene-photo.png"  />
+                </div>
+            </div>
+            <div class="info-box ub ub-ac ub-pj">
+                <div class="left-info">
+                    <div class="user-box ub ub-ac">
+                        <div class="user-icon"></div>
+                        <div class="text umar-l">张松</div>
+                        <span class="detail-text">3小时</span>
+                    </div>
+                </div>
+                <div class="right-info">
+                    <div class="ub ub-ac ub-pj">
+                        <div class="construction-box ub ub-ac">
+                            <div class="construction-icon"></div>
+                            <div class="text umar-l">建筑</div>
+                        </div>
+                        <div class="address-box ub ub-ac">
+                            <div class="address-icon "></div>
+                            <div class="text umar-l">中国&nbsp;&nbsp;长沙</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->

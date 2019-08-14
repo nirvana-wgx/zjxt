@@ -1,0 +1,92 @@
+<ion-view view-title="监控日志" class="bc-bg-gray">
+    <ion-header-bar>
+        <div class="buttons"  ng-click="toClose()">
+            <button class="icon ion-chevron-left"></button>
+        </div>
+        <h1 class="title text-title">监控日志</h1>
+    </ion-header-bar>
+    <ion-content class="has-footer">
+        <div class="scene-add-box">
+            <div class="add-select">
+                <div class="add-pa ub ub-ac ub-pj bc-border ubb">
+                    <div class="title">项目名称</div>
+                    <div class="right-box ub-f1 ub ub-ac ub-pe">
+                        <div class="select-text umar-r">{{addMonitor.projectInfoName}}</div>
+                    </div>
+                </div>
+            </div> 
+            <div class="add-select">
+                <div class="add-pa ub ub-ac ub-pj bc-border ubb">
+                    <div class="title">监控日期</div>
+                    <div class="right-box ub-f1 ub ub-ac ub-pe">
+                        <div class="select-text umar-r">{{addMonitor.date}}</div>
+                    </div>
+                </div>
+            </div> 
+            <div class="add-select">
+                <div class="add-pa ub ub-ac ub-pj bc-border ubb">
+                    <div class="title">天气</div>
+                    <div class="right-box ub-f1 ub ub-ac ub-pe">
+                        <select ng-model="select.weather" ng-options="e.name for e in weatherList"></select>
+                        <div class="select-text umar-r" ng-show="select.weather!=''">{{select.weather.name}}</div> 
+                        <div class="select-text umar-r" ng-show="select.weather==''">请选择天气</div>
+                        <li class="icon ion-chevron-right umar-l" ></li>
+                    </div>
+                </div>
+            </div> 
+            <div class="add-select">
+                <div class="add-pa ub ub-ac ub-pj bc-border ubb">
+                    <div class="title">合同名称</div>
+                    <div class="right-box ub-f1 ub ub-ac ub-pe">
+                        <select ng-model="select.contract" ng-options="e.contractName for e in contractList" ng-change="selectContract()"></select>
+                        <div class="select-text umar-r" ng-show="select.contract!=''">{{select.contract.contractName}}</div> 
+                        <div class="select-text umar-r" ng-show="select.contract==''">请选择合同名称</div>
+                        <li class="icon ion-chevron-right umar-l" ></li>
+                    </div>
+                </div>
+            </div>
+            <div class="add-select">
+                <div class="add-pa ub ub-ac ub-pj bc-border ubb">
+                    <div class="title">供方名称</div>
+                    <div class="right-box ub-f1 ub ub-ac ub-pe">
+                        <div class="select-text umar-r">{{select.contract.supplierName}}</div>
+                    </div> 
+                </div>
+            </div> 
+            <div class="add-select-end ub ub-ac ub-pj bc-border ubb">
+                <div class="title">设备名称</div>
+                <div class="right-box ub-f1 ub ub-ac ub-pe">
+                    <select ng-model="select.equipment" ng-options="e.name for e in equipmentList"></select>
+                    <div class="select-text umar-r" ng-show="select.equipment!=''">{{select.equipment.name}}</div> 
+                    <div class="select-text umar-r" ng-show="select.equipment==''">请选择设备名称</div>
+                    <li class="icon ion-chevron-right umar-l" ></li>
+                </div>
+            </div>
+            <div class="add-textarea bc-border ubb">
+                <div class="textarea-name">当日主要工作内容</div>
+                <textarea class="textarea-text"ng-model="addMonitor.workContent" placeholder="请输入当日主要工作内容..."></textarea>
+            </div>
+            <div class="add-textarea bc-border ubb">
+                <div class="textarea-name">存在的主要问题</div>
+                <textarea class="textarea-text"ng-model="addMonitor.question" placeholder="请输入存在的主要问题.."></textarea>
+            </div>
+            <div class="add-textarea bc-border ubb">
+                <div class="textarea-name">处理情况</div>
+                <textarea class="textarea-text"ng-model="addMonitor.controlResult" placeholder="请输入处理情况..."></textarea>
+            </div>
+            <div class="scene-add-img bc-border ubb " >
+                <div class="add-name">现场拍照</div>
+                <div class="pictures-box">
+                    <div class="pictures-img ub ub-ac ub-pc" ng-repeat="img in imgList">
+                        <img   actual-src="{{img | downImg}}"  />
+                        <i class="icon ion-close-circled pic-close" ng-click="removeImg(img)"></i>
+                    </div>
+                    <div class="add-img-icon" ng-click="selectPhotoType()"></div>
+                </div>
+            </div>        
+        </div>
+    </ion-content>
+    <div class="footer">
+        <div class="btn btn-r ub-f1" ng-click="submit()">提交</div>
+    </div>
+</ion-view>

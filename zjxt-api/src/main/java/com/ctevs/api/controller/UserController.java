@@ -17,7 +17,7 @@ import com.ctevs.service.UserService;
  
 
 @RestController
-@RequestMapping("/xtm-api/user")
+@RequestMapping("/zjxt-api/user")
 public class UserController  extends ControllerSupport{
 	
 	@Autowired

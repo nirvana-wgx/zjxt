@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 文件输出格式 -->
-    <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+    <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n"/>
     <!-- test文件路径 -->
-    <property name="TEST_FILE_PATH" value="/Users/liumin/log/test.log" />
+    <property name="TEST_FILE_PATH" value="/Users/liumin/log/test.log"/>
     <!-- pro文件路径 -->
-    <property name="PRO_FILE_PATH" value="/opt/test/log" />
-    
+    <property name="PRO_FILE_PATH" value="/opt/test/log"/>
+
     <!-- 开发环境 -->
     <springProfile name="dev">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -14,12 +14,12 @@
                 <pattern>${PATTERN}</pattern>
             </encoder>
         </appender>
-        <logger name="com.light.springboot" level="debug" />
+        <logger name="com.light.springboot" level="debug"/>
         <root level="info">
-            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
-    
+
     <!-- 测试环境 -->
     <springProfile name="test">
         <!-- 每天产生一个文件 -->
@@ -37,10 +37,10 @@
             </layout>
         </appender>
         <root level="info">
-            <appender-ref ref="TEST-FILE" />
+            <appender-ref ref="TEST-FILE"/>
         </root>
     </springProfile>
-    
+
     <!-- 生产环境 -->
     <springProfile name="prod">
         <appender name="PROD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -54,7 +54,7 @@
             </layout>
         </appender>
         <root level="warn">
-            <appender-ref ref="PROD_FILE" />
+            <appender-ref ref="PROD_FILE"/>
         </root>
     </springProfile>
 </configuration>

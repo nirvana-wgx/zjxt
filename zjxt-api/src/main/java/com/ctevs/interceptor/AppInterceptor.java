@@ -23,20 +23,20 @@ public class AppInterceptor extends TimeoutWriter implements HandlerInterceptor 
                              HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader(Constants.TOKEN);
         String userId = request.getHeader(Constants.USERID);
-        
+
         if (StringUtils.isEmpty(token)) {
             token = request.getParameter(Constants.TOKEN);
         }
         if (StringUtils.isEmpty(userId)) {
-        	    userId = request.getParameter(Constants.USERID);
+            userId = request.getParameter(Constants.USERID);
         }
         if (tokenService.isValidToken(token, userId)) {
             return true;
-        } 
-        
+        }
+
         return true;
         //writeTimeOutMsg(response);
-       // return false;
+        // return false;
     }
 
     @Override

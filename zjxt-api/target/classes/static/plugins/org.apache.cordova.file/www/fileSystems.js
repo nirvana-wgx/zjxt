@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.file.fileSystems", function(require, exports, module) { /*
+cordova.define("org.apache.cordova.file.fileSystems", function (require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -20,8 +20,8 @@ cordova.define("org.apache.cordova.file.fileSystems", function(require, exports,
 */
 
 // Overridden by Android, BlackBerry 10 and iOS to populate fsMap.
-module.exports.getFs = function(name, callback) {
-    callback(null);
-};
+    module.exports.getFs = function (name, callback) {
+        callback(null);
+    };
 
 });

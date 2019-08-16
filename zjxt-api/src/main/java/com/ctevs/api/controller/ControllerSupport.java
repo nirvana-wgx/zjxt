@@ -25,43 +25,45 @@ import com.ctevs.api.exception.AppException;
  */
 public class ControllerSupport {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ControllerSupport.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ControllerSupport.class);
 
-	/**
-	 * 异常处理
-	 * @param req HttpServletRequest
-	 * @param resp HttpServletResponse
-	 * @param exp 异常
-	 * @return 异常结果code和msg
+    /**
+     * 异常处理
+     *
+     * @param req  HttpServletRequest
+     * @param resp HttpServletResponse
+     * @param exp  异常
+     * @return 异常结果code和msg
      * @throws Exception
      */
-	@ExceptionHandler
-	@ResponseBody
-	public Map<String, Object> exp(HttpServletRequest req,
-			HttpServletResponse resp, Exception exp) throws Exception {
+    @ExceptionHandler
+    @ResponseBody
+    public Map<String, Object> exp(HttpServletRequest req,
+                                   HttpServletResponse resp, Exception exp) throws Exception {
 //		LOG.error(exp, exp);
-		LOGGER.error(exp.getMessage(),exp);
-		Map<String, Object> map = new HashMap<String, Object>(2);
-		if (exp instanceof AppException){
-			map.put(CODE, SERVER_ERR);
-			map.put(MSG, exp.getMessage());
-		} else {
-			map.put(CODE, SERVER_ERR);
-			map.put(MSG, MSG_SERVER_ERR);
-			//add by xue temp
-			map.put("ERROR", exp.getMessage());
-		}
-		
-		return map;
-	}
+        LOGGER.error(exp.getMessage(), exp);
+        Map<String, Object> map = new HashMap<String, Object>(2);
+        if (exp instanceof AppException) {
+            map.put(CODE, SERVER_ERR);
+            map.put(MSG, exp.getMessage());
+        } else {
+            map.put(CODE, SERVER_ERR);
+            map.put(MSG, MSG_SERVER_ERR);
+            //add by xue temp
+            map.put("ERROR", exp.getMessage());
+        }
 
-	/**
-	 * 处理成功的方法,返回map里加入成功的code和msg
-	 * @param map 相应参数map
+        return map;
+    }
+
+    /**
+     * 处理成功的方法,返回map里加入成功的code和msg
+     *
+     * @param map 相应参数map
      */
-	protected void success(Map<String, Object> map) {
-		map.put(CODE, SUCCESS);
-		map.put(MSG, MSG_SUCCESS);
-	}
+    protected void success(Map<String, Object> map) {
+        map.put(CODE, SUCCESS);
+        map.put(MSG, MSG_SUCCESS);
+    }
 
 }

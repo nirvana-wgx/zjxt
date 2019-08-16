@@ -3,7 +3,6 @@ package com.ctevs.common.vo;
 
 /**
  * 微信通用接口凭证
- *
  */
 public class AccessToken {
     // 获取到的凭证
@@ -13,19 +12,19 @@ public class AccessToken {
 
     //凭证最后生成时间
     private long createTime;
- 
+
     public String getToken() {
         return token;
     }
- 
+
     public void setToken(String token) {
         this.token = token;
     }
- 
+
     public int getExpiresIn() {
         return expiresIn;
     }
- 
+
     public void setExpiresIn(int expiresIn) {
         this.expiresIn = expiresIn;
     }

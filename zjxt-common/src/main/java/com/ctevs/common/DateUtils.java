@@ -47,9 +47,10 @@ public class DateUtils {
      * @return
      */
     public static String getDateYMDHMSFormat() {
-    	SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    	return s.format(new Date());
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return s.format(new Date());
     }
+
     /**
      * 获取时间的年月日时分
      *
@@ -239,6 +240,7 @@ public class DateUtils {
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         return s.format(date);
     }
+
     /**
      * 格式化时间
      *
@@ -249,6 +251,7 @@ public class DateUtils {
         SimpleDateFormat s = new SimpleDateFormat("yyyyMMdd");
         return s.format(date);
     }
+
     /**
      * 格式化时间
      *
@@ -256,9 +259,10 @@ public class DateUtils {
      * @return yyyy-MM-dd 时间
      */
     public static String formatDateHMS(Date date) {
-    	SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
-    	return s.format(date);
+        SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
+        return s.format(date);
     }
+
     /**
      * 格式化时间
      *
@@ -424,25 +428,27 @@ public class DateUtils {
             return null;
         }
     }
+
     /**
      * 为年月日添加 -  如20121214变为20112-12-14
      */
     public static String addHengToDate(String date) {
-    	String returnDate = null;
-    	if(date!=null && !"".equals(date.trim())){
-    		returnDate =  date.substring(0, 4)+"-"+date.substring(4,6)+"-"+date.substring(6,8);
-    	}
-    	return returnDate;
+        String returnDate = null;
+        if (date != null && !"".equals(date.trim())) {
+            returnDate = date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
+        }
+        return returnDate;
     }
+
     /**
      * 为时分秒添加 :  如121214变为12:14:15
      */
     public static String addHengToTime(String time) {
-    	String returnTime = null;
-    	if(time!=null && !"".equals(time.trim())){
-    		returnTime =  time.substring(0, 2)+":"+time.substring(2,4)+":"+time.substring(4,6);
-    	}
-    	return returnTime;
+        String returnTime = null;
+        if (time != null && !"".equals(time.trim())) {
+            returnTime = time.substring(0, 2) + ":" + time.substring(2, 4) + ":" + time.substring(4, 6);
+        }
+        return returnTime;
     }
   /*  public static void main(String[] args) {
 		System.out.println(addHengToDate("20121214"));
@@ -514,14 +520,14 @@ public class DateUtils {
      * @return
      * @throws Exception
      */
-    public static Map<String, String> getStringYMDHSM(String dateStr)  {
+    public static Map<String, String> getStringYMDHSM(String dateStr) {
         Map<String, String> map = new HashMap<String, String>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Date date = null;
-        try{
-             date =  formatter.parse(dateStr);
-        }catch (Exception e){
+        try {
+            date = formatter.parse(dateStr);
+        } catch (Exception e) {
             System.out.println("Exception: formatter date is false --DateUtils 505");
         }
 
@@ -549,19 +555,20 @@ public class DateUtils {
     }
 
     /**
-     *
      * @return yyyy-MM-dd
      */
     public static String getDateYMDOther() {
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         return s.format(new Date());
     }
-//
+
+    //
 //	public static void main(String[] args) {
 //		System.out.println(getDateYMDOther());
 //	}
 // 格式：年－月－日 小时：分钟：秒
     public static final String FORMAT_ONE = "yyyy-MM-dd HH:mm:ss";
+
     /**
      * 获得当前日期字符串，格式"yyyy-MM-dd HH:mm:ss"
      *
@@ -571,6 +578,7 @@ public class DateUtils {
         Calendar today = Calendar.getInstance();
         return dateToString(today.getTime(), FORMAT_ONE);
     }
+
     /**
      * 把日期转换为字符串
      */

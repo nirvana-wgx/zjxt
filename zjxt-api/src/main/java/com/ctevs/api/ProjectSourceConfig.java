@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.ctevs.dao", sqlSessionTemplateRef  = "projectSqlSessionTemplate")
+@MapperScan(basePackages = "com.ctevs.dao", sqlSessionTemplateRef = "projectSqlSessionTemplate")
 public class ProjectSourceConfig {
 
     @Bean(name = "projectDataSource")

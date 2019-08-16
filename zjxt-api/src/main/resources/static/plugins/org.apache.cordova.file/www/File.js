@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.file.File", function(require, exports, module) { /*
+cordova.define("org.apache.cordova.file.File", function (require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,63 +19,63 @@ cordova.define("org.apache.cordova.file.File", function(require, exports, module
  *
 */
 
-/**
- * Constructor.
- * name {DOMString} name of the file, without path information
- * fullPath {DOMString} the full path of the file, including the name
- * type {DOMString} mime type
- * lastModifiedDate {Date} last modified date
- * size {Number} size of the file in bytes
- */
+    /**
+     * Constructor.
+     * name {DOMString} name of the file, without path information
+     * fullPath {DOMString} the full path of the file, including the name
+     * type {DOMString} mime type
+     * lastModifiedDate {Date} last modified date
+     * size {Number} size of the file in bytes
+     */
 
-var File = function(name, localURL, type, lastModifiedDate, size){
-    this.name = name || '';
-    this.localURL = localURL || null;
-    this.type = type || null;
-    this.lastModified = lastModifiedDate || null;
-    // For backwards compatibility, store the timestamp in lastModifiedDate as well
-    this.lastModifiedDate = lastModifiedDate || null;
-    this.size = size || 0;
+    var File = function (name, localURL, type, lastModifiedDate, size) {
+        this.name = name || '';
+        this.localURL = localURL || null;
+        this.type = type || null;
+        this.lastModified = lastModifiedDate || null;
+        // For backwards compatibility, store the timestamp in lastModifiedDate as well
+        this.lastModifiedDate = lastModifiedDate || null;
+        this.size = size || 0;
 
-    // These store the absolute start and end for slicing the file.
-    this.start = 0;
-    this.end = this.size;
-};
+        // These store the absolute start and end for slicing the file.
+        this.start = 0;
+        this.end = this.size;
+    };
 
-/**
- * Returns a "slice" of the file. Since Cordova Files don't contain the actual
- * content, this really returns a File with adjusted start and end.
- * Slices of slices are supported.
- * start {Number} The index at which to start the slice (inclusive).
- * end {Number} The index at which to end the slice (exclusive).
- */
-File.prototype.slice = function(start, end) {
-    var size = this.end - this.start;
-    var newStart = 0;
-    var newEnd = size;
-    if (arguments.length) {
-        if (start < 0) {
-            newStart = Math.max(size + start, 0);
-        } else {
-            newStart = Math.min(size, start);
+    /**
+     * Returns a "slice" of the file. Since Cordova Files don't contain the actual
+     * content, this really returns a File with adjusted start and end.
+     * Slices of slices are supported.
+     * start {Number} The index at which to start the slice (inclusive).
+     * end {Number} The index at which to end the slice (exclusive).
+     */
+    File.prototype.slice = function (start, end) {
+        var size = this.end - this.start;
+        var newStart = 0;
+        var newEnd = size;
+        if (arguments.length) {
+            if (start < 0) {
+                newStart = Math.max(size + start, 0);
+            } else {
+                newStart = Math.min(size, start);
+            }
         }
-    }
 
-    if (arguments.length >= 2) {
-        if (end < 0) {
-            newEnd = Math.max(size + end, 0);
-        } else {
-            newEnd = Math.min(end, size);
+        if (arguments.length >= 2) {
+            if (end < 0) {
+                newEnd = Math.max(size + end, 0);
+            } else {
+                newEnd = Math.min(end, size);
+            }
         }
-    }
 
-    var newFile = new File(this.name, this.localURL, this.type, this.lastModified, this.size);
-    newFile.start = this.start + newStart;
-    newFile.end = this.start + newEnd;
-    return newFile;
-};
+        var newFile = new File(this.name, this.localURL, this.type, this.lastModified, this.size);
+        newFile.start = this.start + newStart;
+        newFile.end = this.start + newEnd;
+        return newFile;
+    };
 
 
-module.exports = File;
+    module.exports = File;
 
 });

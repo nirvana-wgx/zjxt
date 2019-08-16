@@ -8,10 +8,10 @@ import com.ctevs.po.UserBean;
 @Repository
 public interface UserDao {
 
-	UserBean getUser(@Param("code") String loginName, @Param("password") String password);
-	
-	UserBean getUserInfo(@Param("userId") String userId);
-	
-	UserBean getAccount(@Param("account") String account);
+    UserBean getUser(@Param("code") String loginName, @Param("password") String password);
+
+    UserBean getUserInfo(@Param("userId") String userId);
+
+    UserBean getAccount(@Param("account") String account);
 }
  

@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.ctevs.base", sqlSessionTemplateRef  = "baseSqlSessionTemplate")
+@MapperScan(basePackages = "com.ctevs.base", sqlSessionTemplateRef = "baseSqlSessionTemplate")
 public class BaseSourceConfig {
 
     @Bean(name = "baseDataSource")

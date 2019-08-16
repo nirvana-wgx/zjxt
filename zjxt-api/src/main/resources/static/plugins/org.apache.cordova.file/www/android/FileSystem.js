@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.file.androidFileSystem", function(require, exports, module) { /*
+cordova.define("org.apache.cordova.file.androidFileSystem", function (require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,17 +19,17 @@ cordova.define("org.apache.cordova.file.androidFileSystem", function(require, ex
  *
 */
 
-FILESYSTEM_PROTOCOL = "cdvfile";
+    FILESYSTEM_PROTOCOL = "cdvfile";
 
-module.exports = {
-    __format__: function(fullPath) {
-        if (this.name === 'content') {
-            return 'content:/' + fullPath;
+    module.exports = {
+        __format__: function (fullPath) {
+            if (this.name === 'content') {
+                return 'content:/' + fullPath;
+            }
+            var path = ('/' + this.name + (fullPath[0] === '/' ? '' : '/') + encodeURI(fullPath)).replace('//', '/');
+            return FILESYSTEM_PROTOCOL + '://localhost' + path;
         }
-        var path = ('/'+this.name+(fullPath[0]==='/'?'':'/')+encodeURI(fullPath)).replace('//','/');
-        return FILESYSTEM_PROTOCOL + '://localhost' + path;
-    }
-};
+    };
 
 
 });

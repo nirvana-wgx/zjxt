@@ -34,7 +34,7 @@ public class WeixinUtil {
      * @param requestUrl    请求地址
      * @param requestMethod 请求方式（GET、POST）
      * @param outputStr     提交的数据
-     * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
+     * @return JSONObject(通过JSONObject.get ( key)的方式获取json对象的属性值)
      */
     public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr) {
         JSONObject jsonObject = null;
@@ -121,8 +121,8 @@ public class WeixinUtil {
                     log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
                 }
             }
-        }else{
-            if ((new Date().getTime()-accessToken.getCreateTime())>accessToken.getCreateTime()*1000){
+        } else {
+            if ((new Date().getTime() - accessToken.getCreateTime()) > accessToken.getCreateTime() * 1000) {
                 String requestUrl = WeChatURL.access_token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
                 JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
                 // 如果请求成功
@@ -141,8 +141,6 @@ public class WeixinUtil {
             }
 
         }
-
-
 
 
         return accessToken;
@@ -172,8 +170,8 @@ public class WeixinUtil {
                     log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
                 }
             }
-        }else{
-            if ((new Date().getTime()-accessToken.getCreateTime())>accessToken.getCreateTime()*1000){
+        } else {
+            if ((new Date().getTime() - accessToken.getCreateTime()) > accessToken.getCreateTime() * 1000) {
                 String requestUrl = WeChatURL.access_token_url.replace("APPID", appId).replace("APPSECRET", appSceret);
                 JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
                 // 如果请求成功
@@ -196,10 +194,10 @@ public class WeixinUtil {
         return accessToken;
     }
 
-public static  void main(String args[]){
-    AccessToken at = getAccessToken();
-    System.out.println(at.getToken());
+    public static void main(String args[]) {
+        AccessToken at = getAccessToken();
+        System.out.println(at.getToken());
 
-}
+    }
 
 }

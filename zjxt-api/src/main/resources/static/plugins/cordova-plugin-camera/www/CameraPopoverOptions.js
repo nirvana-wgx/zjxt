@@ -1,4 +1,4 @@
-cordova.define("cordova-plugin-camera.CameraPopoverOptions", function(require, exports, module) { /*
+cordova.define("cordova-plugin-camera.CameraPopoverOptions", function (require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,21 +19,21 @@ cordova.define("cordova-plugin-camera.CameraPopoverOptions", function(require, e
  *
 */
 
-var Camera = require('./Camera');
+    var Camera = require('./Camera');
 
-/**
- * Encapsulates options for iOS Popover image picker
- */
-var CameraPopoverOptions = function(x,y,width,height,arrowDir){
-    // information of rectangle that popover should be anchored to
-    this.x = x || 0;
-    this.y = y || 32;
-    this.width = width || 320;
-    this.height = height || 480;
-    // The direction of the popover arrow
-    this.arrowDir = arrowDir || Camera.PopoverArrowDirection.ARROW_ANY;
-};
+    /**
+     * Encapsulates options for iOS Popover image picker
+     */
+    var CameraPopoverOptions = function (x, y, width, height, arrowDir) {
+        // information of rectangle that popover should be anchored to
+        this.x = x || 0;
+        this.y = y || 32;
+        this.width = width || 320;
+        this.height = height || 480;
+        // The direction of the popover arrow
+        this.arrowDir = arrowDir || Camera.PopoverArrowDirection.ARROW_ANY;
+    };
 
-module.exports = CameraPopoverOptions;
+    module.exports = CameraPopoverOptions;
 
 });

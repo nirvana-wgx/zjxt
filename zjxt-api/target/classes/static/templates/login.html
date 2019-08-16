@@ -1,24 +1,24 @@
 <ion-view view-title="登录">
     <ion-header-bar>
-      <h1 class="title text-title">登录</h1>
+        <h1 class="title text-title">登录</h1>
     </ion-header-bar>
     <ion-content class="login bc-bg">
-      <div  class="login-title">欢迎登录中冶长天</div>
-      <div class="login-box">
-        <div class="form-group ub ub-ac ubb bc-border">
-          <div class="form-title">手机号</div>
-          <div class="form-input ub-f1">
-              <input type="text" maxlength="11"   ng-model="loginName" placeholder="输入" />
-          </div>
+        <div class="login-title">欢迎登录中冶长天</div>
+        <div class="login-box">
+            <div class="form-group ub ub-ac ubb bc-border">
+                <div class="form-title">手机号</div>
+                <div class="form-input ub-f1">
+                    <input type="text" maxlength="11" ng-model="loginName" placeholder="输入"/>
+                </div>
+            </div>
+            <div class="form-group ub ub-ac ubb bc-border">
+                <div class="form-title">密码</div>
+                <div class="form-input ub-f1">
+                    <input type="password" maxlength="20" ng-model="password" placeholder="输入密码"/>
+                </div>
+            </div>
+            <button class="login-button" ng-click="login()">登录</button>
         </div>
-        <div class="form-group ub ub-ac ubb bc-border">
-          <div class="form-title">密码</div>
-          <div class="form-input ub-f1">
-              <input type="password" maxlength="20"  ng-model="password" placeholder="输入密码"/>
-          </div>
-        </div>
-        <button class="login-button" ng-click="login()">登录</button>
-      </div>
     </ion-content>
-  </ion-view>
+</ion-view>
   

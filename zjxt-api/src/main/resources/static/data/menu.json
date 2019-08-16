@@ -1,63 +1,62 @@
 {
-    "siteList":[
-       {
-          "id":1,
-          "url":"doc-upload",
-          "title":"文档上传",
-          "icon":"doc-upload-icon",
-          "total":0
-        },
-        {
-          "id":2,
-          "url":"doc-browsing",
-          "title":"文档浏览",
-          "icon":"doc-browsing-icon",
-          "total":0
-        },
-        {
-          "id":3,
-          "url":"project-schedule",
-          "title":"施工进度反馈",
-          "icon":"project-schedule-icon",
-          "total":0
-        },
-        {
-          "id":4,
-          "url":"scene-photo",
-          "title":"现场拍照",
-          "icon":"scene-photo-icon",
-          "total":0
-        }
-        
-    ],
-    "purchasingList":[
-        {
-           "id":1,
-           "url":"purchase-schedule",
-           "title":"采购进度反馈",
-           "icon":"buying-schedule-icon",
-           "total":0
-         },
-         {
-           "id":2,
-           "url":"monitor-log",
-           "title":"监制日志",
-           "icon":"monitor-log-icon",
-           "total":0
-         },
-         {
-           "id":3,
-           "url":"logistics-code",
-           "title":"物流二维码",
-           "icon":"logistics-code-icon",
-           "total":0
-         },
-         {
-           "id":4,
-           "url":"logistics-damaged",
-           "title":"物流破损",
-           "icon":"logistics-breakage-icon",
-           "total":0
-         }
-     ]
-  }
+  "siteList": [
+    {
+      "id": 1,
+      "url": "doc-upload",
+      "title": "文档上传",
+      "icon": "doc-upload-icon",
+      "total": 0
+    },
+    {
+      "id": 2,
+      "url": "doc-browsing",
+      "title": "文档浏览",
+      "icon": "doc-browsing-icon",
+      "total": 0
+    },
+    {
+      "id": 3,
+      "url": "project-schedule",
+      "title": "施工进度反馈",
+      "icon": "project-schedule-icon",
+      "total": 0
+    },
+    {
+      "id": 4,
+      "url": "scene-photo",
+      "title": "现场拍照",
+      "icon": "scene-photo-icon",
+      "total": 0
+    }
+  ],
+  "purchasingList": [
+    {
+      "id": 1,
+      "url": "purchase-schedule",
+      "title": "采购进度反馈",
+      "icon": "buying-schedule-icon",
+      "total": 0
+    },
+    {
+      "id": 2,
+      "url": "monitor-log",
+      "title": "监制日志",
+      "icon": "monitor-log-icon",
+      "total": 0
+    },
+    {
+      "id": 3,
+      "url": "logistics-code",
+      "title": "物流二维码",
+      "icon": "logistics-code-icon",
+      "total": 0
+    },
+    {
+      "id": 4,
+      "url": "logistics-damaged",
+      "title": "物流破损",
+      "icon": "logistics-breakage-icon",
+      "total": 0
+    }
+  ]
+}

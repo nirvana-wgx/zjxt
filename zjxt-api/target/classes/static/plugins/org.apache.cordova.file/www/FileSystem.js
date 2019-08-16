@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.file.FileSystem", function(require, exports, module) { /*
+cordova.define("org.apache.cordova.file.FileSystem", function (require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,32 +19,32 @@ cordova.define("org.apache.cordova.file.FileSystem", function(require, exports, 
  *
 */
 
-var DirectoryEntry = require('./DirectoryEntry');
+    var DirectoryEntry = require('./DirectoryEntry');
 
-/**
- * An interface representing a file system
- *
- * @constructor
- * {DOMString} name the unique name of the file system (readonly)
- * {DirectoryEntry} root directory of the file system (readonly)
- */
-var FileSystem = function(name, root) {
-    this.name = name;
-    if (root) {
-        this.root = new DirectoryEntry(root.name, root.fullPath, this, root.nativeURL);
-    } else {
-        this.root = new DirectoryEntry(this.name, '/', this);
-    }
-};
+    /**
+     * An interface representing a file system
+     *
+     * @constructor
+     * {DOMString} name the unique name of the file system (readonly)
+     * {DirectoryEntry} root directory of the file system (readonly)
+     */
+    var FileSystem = function (name, root) {
+        this.name = name;
+        if (root) {
+            this.root = new DirectoryEntry(root.name, root.fullPath, this, root.nativeURL);
+        } else {
+            this.root = new DirectoryEntry(this.name, '/', this);
+        }
+    };
 
-FileSystem.prototype.__format__ = function(fullPath) {
-    return fullPath;
-};
+    FileSystem.prototype.__format__ = function (fullPath) {
+        return fullPath;
+    };
 
-FileSystem.prototype.toJSON = function() {
-    return "<FileSystem: " + this.name + ">";
-};
+    FileSystem.prototype.toJSON = function () {
+        return "<FileSystem: " + this.name + ">";
+    };
 
-module.exports = FileSystem;
+    module.exports = FileSystem;
 
 });

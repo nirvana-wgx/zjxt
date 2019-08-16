@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "Demo信息管理")
 @RequestMapping("/v1/demo")
 @RestController
-public class DemoController {
+public class DemoController extends ControllerSupport {
 
     @Autowired
     DemoService demoService;
@@ -50,7 +50,7 @@ public class DemoController {
     @PostMapping(DemoApi.DEMO_INSERT)
     @ApiOperation(value = "信息插入",produces = "application/json")
     @ApiResponse(code = 200,message = "信息插入")
-    public void insertInformationDemo(DemoVo demoVo){
+    public void insertInformationDemo(DemoVo demoVo) throws Exception {
         DemoPo demoPo = new DemoPo();
 
         demoPo.setUserId(demoVo.getUserId());
@@ -60,7 +60,7 @@ public class DemoController {
         try {
             demoService.insertDemo(demoPo);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 

@@ -1,7 +1,5 @@
 package com.ctevs.common.vo;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 /**
@@ -10,7 +8,6 @@ import java.io.Serializable;
  * @Date Created on 2019/8/16 14:32
  * @Description : demoVo
  */
-@Data
 public class DemoVo implements Serializable {
 
     //序列化ID
@@ -20,4 +17,27 @@ public class DemoVo implements Serializable {
     private String userName;
     private int age;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

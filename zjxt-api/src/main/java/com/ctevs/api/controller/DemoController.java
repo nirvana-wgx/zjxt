@@ -1,5 +1,6 @@
 package com.ctevs.api.controller;
 
+import com.ctevs.api.exception.AppException;
 import com.ctevs.common.api.DemoApi;
 import com.ctevs.common.vo.DemoVo;
 import com.ctevs.po.DemoPo;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date Created on 2019/8/16 14:28
  * @Description : DemoController
  */
-@Api(tags = "Demo信息管理")
+@Api(tags = "DemoController")
 @RequestMapping("/v1/demo")
 @RestController
 public class DemoController extends ControllerSupport {
@@ -60,7 +61,7 @@ public class DemoController extends ControllerSupport {
         try {
             demoService.insertDemo(demoPo);
         } catch (Exception e) {
-            throw e;
+            throw new AppException("新增失败......");
         }
     }
 

@@ -1,7 +1,5 @@
 package com.ctevs.service.impl;
 
-import com.ctevs.common.Code;
-import com.ctevs.common.MessageUtil;
 import com.ctevs.dao.DemoInformationMapper;
 import com.ctevs.entity.DemoInformation;
 import com.ctevs.po.DemoPo;
@@ -41,7 +39,7 @@ public class DemoServiceImpl implements DemoService {
         demoInformation.setAge(demoPo.getAge());
 
         if(demoInformationDao.insert(demoInformation)<=0){
-            throw new Exception("插入失败");
+            throw new Exception();
         }
     }
 }

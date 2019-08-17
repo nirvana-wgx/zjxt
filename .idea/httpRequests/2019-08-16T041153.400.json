@@ -1,0 +1,8 @@
+{
+  "timestamp": 1565943113113,
+  "status": 400,
+  "error": "Bad Request",
+  "exception": "org.springframework.http.converter.HttpMessageNotReadableException",
+  "message": "Required request body is missing: public com.ctevs.common.vo.DemoVo com.ctevs.api.controller.DemoController.getInformationDemo(com.ctevs.common.vo.DemoVo)",
+  "path": "/v1/demo/information"
+}

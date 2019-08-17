@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="zjxt-api" />
+        <module name="zjxt-common" />
+        <module name="zjxt-mapper" />
+        <module name="zjxt-po" />
+        <module name="zjxt-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="zjxt-api" target="1.7" />
+      <module name="zjxt-common" target="1.7" />
+      <module name="zjxt-mapper" target="1.7" />
+      <module name="zjxt-parent" target="1.7" />
+      <module name="zjxt-po" target="1.7" />
+      <module name="zjxt-service" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/zjxt-api/zjxt-api.iml" filepath="$PROJECT_DIR$/zjxt-api/zjxt-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zjxt-common/zjxt-common.iml" filepath="$PROJECT_DIR$/zjxt-common/zjxt-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zjxt-mapper/zjxt-mapper.iml" filepath="$PROJECT_DIR$/zjxt-mapper/zjxt-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zjxt-parent.iml" filepath="$PROJECT_DIR$/zjxt-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zjxt-po/zjxt-po.iml" filepath="$PROJECT_DIR$/zjxt-po/zjxt-po.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zjxt-service/zjxt-service.iml" filepath="$PROJECT_DIR$/zjxt-service/zjxt-service.iml" />
+    </modules>
+  </component>
+</project>

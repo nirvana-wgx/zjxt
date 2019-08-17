@@ -1,0 +1,42 @@
+GET http://localhost:8080/v1/demo/information
+
+<> 2019-08-16T050837.401.json
+
+###
+
+POST http://localhost:8080/v1/demo/add
+
+<> 2019-08-16T050833.401.json
+
+###
+
+POST http://localhost:8080/v1/demo/add
+
+<> 2019-08-16T050709.401.json
+
+###
+
+GET http://localhost:8080/v1/demo/information
+
+<> 2019-08-16T050650.401.json
+
+###
+
+POST http://localhost:8080/v1/demo/add
+
+<> 2019-08-16T050645.401.json
+
+###
+
+GET http://localhost:8080/v1/demo/information
+
+<> 2019-08-16T041153.400.json
+
+###
+
+GET http://localhost:8080/v1/demo/information
+
+<> 2019-08-16T041133.400.json
+
+###
+

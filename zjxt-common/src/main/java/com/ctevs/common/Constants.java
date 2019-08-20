@@ -1,6 +1,7 @@
 package com.ctevs.common;
 
 public class Constants {
+	 public static final int ZERO = 0;
 	/**
 	 * 接口相应的code属性名,每个接口都有
 	 */

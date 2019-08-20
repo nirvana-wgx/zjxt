@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenbatteryProbeEdt">
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="batterySysNo != null">
+			AND battery_sys_no = #{batterySysNo}
+		</if>
+		<if test="probeNumber != null">
+			AND probe_number = #{probeNumber}
+		</if>
+		<if test="oneProbeNo != null">
+			AND one_probe_no = #{oneProbeNo}
+		</if>
+		<if test="oneProbeTemperature != null">
+			AND one_probe_temperature = #{oneProbeTemperature}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- insert record -->
+	<insert id="insertEquipmenbatteryProbe" parameterType="com.ctevs.po.EquipmenbatteryProbeEntity">
+		<selectKey resultType="java.math.BigInteger" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO T_EQUIPMENT_BATTERY_PROBE (
+		id,
+		equipment_id,
+		batch_no,
+		battery_sys_no,
+		probe_number,
+		one_probe_no,
+		one_probe_temperature,
+		collection_time,
+		addtime
+		) VALUES (
+		#{id} ,
+		#{equipmentId} ,
+		#{batchNo} ,
+		#{batterySysNo} ,
+		#{probeNumber} ,
+		#{oneProbeNo} ,
+		#{oneProbeTemperature} ,
+		#{collectionTime} ,
+		#{addtime}
+		)
+	</insert>
+
+	<!-- update record -->
+	<update id="updateEquipmenbatteryProbeByPrimaryKey" parameterType="com.ctevs.po.EquipmenbatteryProbeEntity">
+		UPDATE T_EQUIPMENT_BATTERY_PROBE
+		<set>
+			<if test="equipmentId != null">
+				equipment_id = #{equipmentId} ,
+			</if>
+			<if test="batchNo != null">
+				batch_no = #{batchNo} ,
+			</if>
+			<if test="batterySysNo != null">
+				battery_sys_no = #{batterySysNo} ,
+			</if>
+			<if test="probeNumber != null">
+				probe_number = #{probeNumber} ,
+			</if>
+			<if test="oneProbeNo != null">
+				one_probe_no = #{oneProbeNo} ,
+			</if>
+			<if test="oneProbeTemperature != null">
+				one_probe_temperature = #{oneProbeTemperature} ,
+			</if>
+			<if test="collectionTime != null">
+				collection_time = #{collectionTime} ,
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime}
+			</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+
+	<!-- delete record -->
+	<delete id="deleteEquipmenbatteryProbe" parameterType="com.ctevs.po.EquipmenbatteryProbeEntity">
+		DELETE FROM T_EQUIPMENT_BATTERY_PROBE
+		WHERE 1=1
+		<include refid="where-all-condition" />
+	</delete>
+
+	<!-- delete record -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+		DELETE FROM T_EQUIPMENT_BATTERY_PROBE
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

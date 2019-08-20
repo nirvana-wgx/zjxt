@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenlimitEdt">
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="highVoltageSysNo != null">
+			AND high_voltage_sys_no = #{highVoltageSysNo}
+		</if>
+		<if test="highVoltageOneBatteryNo != null">
+			AND high_voltage_one_battery_no = #{highVoltageOneBatteryNo}
+		</if>
+		<if test="lowVoltageSysNo != null">
+			AND low_voltage_sys_no = #{lowVoltageSysNo}
+		</if>
+		<if test="lowVoltageOneBatteryNo != null">
+			AND low_voltage_one_battery_no = #{lowVoltageOneBatteryNo}
+		</if>
+		<if test="oneBatteryVoltageHigh != null">
+			AND one_battery_voltage_high = #{oneBatteryVoltageHigh}
+		</if>
+		<if test="oneBatteryVoltageLow != null">
+			AND one_battery_voltage_low = #{oneBatteryVoltageLow}
+		</if>
+		<if test="highTemperatureSysNo != null">
+			AND high_temperature_sys_no = #{highTemperatureSysNo}
+		</if>
+		<if test="highTemperatureProbeNo != null">
+			AND high_temperature_probe_no = #{highTemperatureProbeNo}
+		</if>
+		<if test="highTemperature != null">
+			AND high_temperature = #{highTemperature}
+		</if>
+		<if test="lowTemperatureSysNo != null">
+			AND low_temperature_sys_no = #{lowTemperatureSysNo}
+		</if>
+		<if test="lowTemperatureProbeNo != null">
+			AND low_temperature_probe_no = #{lowTemperatureProbeNo}
+		</if>
+		<if test="lowTemperature != null">
+			AND low_temperature = #{lowTemperature}
+		</if>
+		<if test="voltageDifference != null">
+			AND voltage_difference = #{voltageDifference}
+		</if>
+		<if test="temperatureDifference != null">
+			AND temperature_difference = #{temperatureDifference}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- insert record -->
+	<insert id="insertEquipmenlimit" parameterType="com.ctevs.po.EquipmenlimitEntity">
+		<selectKey resultType="java.math.BigInteger" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO T_EQUIPMENT_LIMIT (
+		id,
+		equipment_id,
+		batch_no,
+		high_voltage_sys_no,
+		high_voltage_one_battery_no,
+		low_voltage_sys_no,
+		low_voltage_one_battery_no,
+		one_battery_voltage_high,
+		one_battery_voltage_low,
+		high_temperature_sys_no,
+		high_temperature_probe_no,
+		high_temperature,
+		low_temperature_sys_no,
+		low_temperature_probe_no,
+		low_temperature,
+		voltage_difference,
+		temperature_difference,
+		collection_time,
+		addtime
+		) VALUES (
+		#{id} ,
+		#{equipmentId} ,
+		#{batchNo} ,
+		#{highVoltageSysNo} ,
+		#{highVoltageOneBatteryNo} ,
+		#{lowVoltageSysNo} ,
+		#{lowVoltageOneBatteryNo} ,
+		#{oneBatteryVoltageHigh} ,
+		#{oneBatteryVoltageLow} ,
+		#{highTemperatureSysNo} ,
+		#{highTemperatureProbeNo} ,
+		#{highTemperature} ,
+		#{lowTemperatureSysNo} ,
+		#{lowTemperatureProbeNo} ,
+		#{lowTemperature} ,
+		#{voltageDifference} ,
+		#{temperatureDifference} ,
+		#{collectionTime} ,
+		#{addtime}
+		)
+	</insert>
+
+	<!-- update record -->
+	<update id="updateEquipmenlimitByPrimaryKey" parameterType="com.ctevs.po.EquipmenlimitEntity">
+		UPDATE T_EQUIPMENT_LIMIT
+		<set>
+			<if test="equipmentId != null">
+				equipment_id = #{equipmentId} ,
+			</if>
+			<if test="batchNo != null">
+				batch_no = #{batchNo} ,
+			</if>
+			<if test="highVoltageSysNo != null">
+				high_voltage_sys_no = #{highVoltageSysNo} ,
+			</if>
+			<if test="highVoltageOneBatteryNo != null">
+				high_voltage_one_battery_no = #{highVoltageOneBatteryNo} ,
+			</if>
+			<if test="lowVoltageSysNo != null">
+				low_voltage_sys_no = #{lowVoltageSysNo} ,
+			</if>
+			<if test="lowVoltageOneBatteryNo != null">
+				low_voltage_one_battery_no = #{lowVoltageOneBatteryNo} ,
+			</if>
+			<if test="oneBatteryVoltageHigh != null">
+				one_battery_voltage_high = #{oneBatteryVoltageHigh} ,
+			</if>
+			<if test="oneBatteryVoltageLow != null">
+				one_battery_voltage_low = #{oneBatteryVoltageLow} ,
+			</if>
+			<if test="highTemperatureSysNo != null">
+				high_temperature_sys_no = #{highTemperatureSysNo} ,
+			</if>
+			<if test="highTemperatureProbeNo != null">
+				high_temperature_probe_no = #{highTemperatureProbeNo} ,
+			</if>
+			<if test="highTemperature != null">
+				high_temperature = #{highTemperature} ,
+			</if>
+			<if test="lowTemperatureSysNo != null">
+				low_temperature_sys_no = #{lowTemperatureSysNo} ,
+			</if>
+			<if test="lowTemperatureProbeNo != null">
+				low_temperature_probe_no = #{lowTemperatureProbeNo} ,
+			</if>
+			<if test="lowTemperature != null">
+				low_temperature = #{lowTemperature} ,
+			</if>
+			<if test="voltageDifference != null">
+				voltage_difference = #{voltageDifference} ,
+			</if>
+			<if test="temperatureDifference != null">
+				temperature_difference = #{temperatureDifference} ,
+			</if>
+			<if test="collectionTime != null">
+				collection_time = #{collectionTime} ,
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime}
+			</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+
+	<!-- delete record -->
+	<delete id="deleteEquipmenlimit" parameterType="com.ctevs.po.EquipmenlimitEntity">
+		DELETE FROM T_EQUIPMENT_LIMIT
+		WHERE 1=1
+		<include refid="where-all-condition" />
+	</delete>
+
+	<!-- delete record -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+		DELETE FROM T_EQUIPMENT_LIMIT
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

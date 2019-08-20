@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenprogramSer">
+	<resultMap id="equipmenprogramMapResult" type="com.ctevs.po.EquipmenprogramEntity">
+		<result column="id" property="id" /> <!-- 序列 -->
+		<result column="equipment_soft_version" property="equipmentSoftVersion" /> <!-- 软件版本号 -->
+		<result column="equipment_hardware_version" property="equipmentHardwareVersion" /> <!-- 硬件版本号 -->
+		<result column="equipment_program_name" property="equipmentProgramName" /> <!-- 程序名称 -->
+		<result column="equipment_program_content" property="equipmentProgramContent" /> <!-- 程序指令 -->
+		<result column="state" property="state" /> <!-- 状态0-无效,1-有效 -->
+		<result column="adduserid" property="adduserid" /> <!-- 创建用户 -->
+		<result column="addtime" property="addtime" /> <!-- 创建时间 -->
+	</resultMap>
+
+	<sql id="select-all-column">
+		id ,
+		equipment_soft_version ,
+		equipment_hardware_version ,
+		equipment_program_name ,
+		equipment_program_content ,
+		state ,
+		adduserid ,
+		addtime
+	</sql>
+
+	<sql id="where-all-page-condition">
+		<if test="f.id != null">
+			AND id = #{f.id}
+		</if>
+		<if test="f.equipmentSoftVersion != null and f.equipmentSoftVersion != ''">
+			AND equipment_soft_version = #{f.equipmentSoftVersion}
+		</if>
+		<if
+			test="f.equipmentHardwareVersion != null and f.equipmentHardwareVersion != ''">
+			AND equipment_hardware_version = #{f.equipmentHardwareVersion}
+		</if>
+		<if test="f.equipmentProgramName != null and f.equipmentProgramName != ''">
+			AND equipment_program_name = #{f.equipmentProgramName}
+		</if>
+		<if test="f.equipmentProgramContent != null">
+			AND equipment_program_content = #{f.equipmentProgramContent}
+		</if>
+		<if test="f.state != null">
+			AND state = #{f.state}
+		</if>
+		<if test="f.adduserid != null">
+			AND adduserid = #{f.adduserid}
+		</if>
+		<if test="f.addtime != null">
+			AND addtime = #{f.addtime}
+		</if>
+	</sql>
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentSoftVersion != null and equipmentSoftVersion != ''">
+			AND equipment_soft_version = #{equipmentSoftVersion}
+		</if>
+		<if
+			test="equipmentHardwareVersion != null and equipmentHardwareVersion != ''">
+			AND equipment_hardware_version = #{equipmentHardwareVersion}
+		</if>
+		<if test="equipmentProgramName != null and equipmentProgramName != ''">
+			AND equipment_program_name = #{equipmentProgramName}
+		</if>
+		<if test="equipmentProgramContent != null">
+			AND equipment_program_content = #{equipmentProgramContent}
+		</if>
+		<if test="state != null">
+			AND state = #{state}
+		</if>
+		<if test="adduserid != null">
+			AND adduserid = #{adduserid}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- query list with page -->
+	<select id="selectEquipmenprogramListByPageCond" resultMap="equipmenprogramMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_PROGRAM WHERE 1=1
+		<include refid="where-all-page-condition" />
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmenprogramListTotalCount" resultType="int">
+		SELECT COUNT(id)
+		FROM T_EQUIPMENT_PROGRAM
+		WHERE 1=1
+		<include refid="where-all-page-condition" />
+	</select>
+
+	<!-- query list without page -->
+	<select id="selectEquipmenprogramListByCond" resultMap="equipmenprogramMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_PROGRAM WHERE 1=1
+		<include refid="where-all-condition" />
+	</select>
+
+	<!-- query record -->
+	<select id="selectEquipmenprogramByCond" resultMap="equipmenprogramMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_PROGRAM WHERE 1=1
+		<include refid="where-all-condition" />
+		LIMIT 1
+	</select>
+
+</mapper>

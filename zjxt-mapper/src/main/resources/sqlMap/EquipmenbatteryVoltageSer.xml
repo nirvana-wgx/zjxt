@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenbatteryVoltageSer">
+	<resultMap id="equipmenbatteryVoltageMapResult" type="com.ctevs.po.EquipmenbatteryVoltageEntity">
+		<result column="id" property="id" /> <!-- 序列 -->
+		<result column="equipment_id" property="equipmentId" /> <!-- 设备ID 12位 -->
+		<result column="batch_no" property="batchNo" /> <!-- 设备数据批次号 -->
+		<result column="battery_sys_no" property="batterySysNo" /> <!-- 可充电储能子系统编号 -->
+		<result column="battery_volage" property="batteryVolage" /> <!-- 可充电储能装置总电压 -->
+		<result column="battery_number" property="batteryNumber" /> <!-- 电池总数（Nv） -->
+		<result column="one_battery_no" property="oneBatteryNo" /> <!-- 单体电池编号 -->
+		<result column="one_battery_volage" property="oneBatteryVolage" /> <!-- 单体电池电压 -->
+		<result column="collection_time" property="collectionTime" /> <!-- 信息采集时间 -->
+		<result column="addtime" property="addtime" /> <!-- 创建时间 -->
+	</resultMap>
+
+	<sql id="select-all-column">
+		id ,
+		equipment_id ,
+		batch_no ,
+		battery_sys_no ,
+		battery_volage ,
+		battery_number ,
+		one_battery_no ,
+		one_battery_volage ,
+		collection_time ,
+		addtime
+	</sql>
+
+	<sql id="where-all-page-condition">
+		<if test="f.id != null">
+			AND id = #{f.id}
+		</if>
+		<if test="f.equipmentId != null and f.equipmentId != ''">
+			AND equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.batchNo != null">
+			AND batch_no = #{f.batchNo}
+		</if>
+		<if test="f.batterySysNo != null">
+			AND battery_sys_no = #{f.batterySysNo}
+		</if>
+		<if test="f.batteryVolage != null">
+			AND battery_volage = #{f.batteryVolage}
+		</if>
+		<if test="f.batteryNumber != null">
+			AND battery_number = #{f.batteryNumber}
+		</if>
+		<if test="f.oneBatteryNo != null">
+			AND one_battery_no = #{f.oneBatteryNo}
+		</if>
+		<if test="f.oneBatteryVolage != null">
+			AND one_battery_volage = #{f.oneBatteryVolage}
+		</if>
+		<if test="f.collectionTime != null">
+			AND collection_time = #{f.collectionTime}
+		</if>
+		<if test="f.addtime != null">
+			AND addtime = #{f.addtime}
+		</if>
+	</sql>
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="batterySysNo != null">
+			AND battery_sys_no = #{batterySysNo}
+		</if>
+		<if test="batteryVolage != null">
+			AND battery_volage = #{batteryVolage}
+		</if>
+		<if test="batteryNumber != null">
+			AND battery_number = #{batteryNumber}
+		</if>
+		<if test="oneBatteryNo != null">
+			AND one_battery_no = #{oneBatteryNo}
+		</if>
+		<if test="oneBatteryVolage != null">
+			AND one_battery_volage = #{oneBatteryVolage}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- query list with page -->
+	<select id="selectEquipmenbatteryVoltageListByPageCond" resultMap="equipmenbatteryVoltageMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_BATTERY_VOLTAGE WHERE 1=1
+		<include refid="where-all-page-condition" />
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmenbatteryVoltageListTotalCount" resultType="int">
+		SELECT COUNT(id)
+		FROM T_EQUIPMENT_BATTERY_VOLTAGE
+		WHERE 1=1
+		<include refid="where-all-page-condition" />
+	</select>
+
+	<!-- query list without page -->
+	<select id="selectEquipmenbatteryVoltageListByCond" resultMap="equipmenbatteryVoltageMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_BATTERY_VOLTAGE WHERE 1=1
+		<include refid="where-all-condition" />
+	</select>
+
+	<!-- query record -->
+	<select id="selectEquipmenbatteryVoltageByCond" resultMap="equipmenbatteryVoltageMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_BATTERY_VOLTAGE WHERE 1=1
+		<include refid="where-all-condition" />
+		LIMIT 1
+	</select>
+
+</mapper>

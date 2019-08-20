@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenwarnSer">
+	<resultMap id="equipmenwarnMapResult" type="com.ctevs.po.EquipmenwarnEntity">
+		<result column="id" property="id" /> <!-- 序列 -->
+		<result column="equipment_id" property="equipmentId" /> <!-- 设备ID 12位 -->
+		<result column="batch_no" property="batchNo" /> <!-- 设备数据批次号 -->
+		<result column="battery_charge_high" property="batteryChargeHigh" /> <!-- 电池充电高温报警 -->
+		<result column="battery_charge_low" property="batteryChargeLow" /> <!-- 电池充电低温报警， -->
+		<result column="battery_charge_out" property="batteryChargeOut" /> <!-- 电池充电过流报警， -->
+		<result column="battery_discharge_out" property="batteryDischargeOut" /> <!-- 电池放电过流报警， -->
+		<result column="battery_discharge_high" property="batteryDischargeHigh" /> <!-- 电池放电高温报警， -->
+		<result column="battery_discharge_low" property="batteryDischargeLow" /> <!-- 电池放电低温报警， -->
+		<result column="voltage_high" property="voltageHigh" /> <!-- 总压过压报警， -->
+		<result column="voltage_low" property="voltageLow" /> <!-- 总压欠压报警， -->
+		<result column="voltage_difference" property="voltageDifference" /> <!-- 总压差报警， -->
+		<result column="temperature_difference" property="temperatureDifference" /> <!-- 总温差报警， -->
+		<result column="one_battery_voltage_out" property="oneBatteryVoltageOut" /> <!-- 单体电池过压报警 -->
+		<result column="one_battery_voltage_low" property="oneBatteryVoltageLow" /> <!-- 单体电池欠压报警 -->
+		<result column="soc_low" property="socLow" /> <!-- SOC过低报警 -->
+		<result column="soc_high" property="socHigh" /> <!-- SOC过高报警 -->
+		<result column="soc_jump" property="socJump" /> <!-- SOC跳变报警， -->
+		<result column="resistance" property="resistance" /> <!-- 绝缘报警， -->
+		<result column="dc_status" property="dcStatus" /> <!-- DC-DC状态报警 -->
+		<result column="high_lock" property="highLock" /> <!-- 高压互锁状态报警， -->
+		<result column="collection_time" property="collectionTime" /> <!-- 信息采集时间 -->
+		<result column="addtime" property="addtime" /> <!-- 创建时间 -->
+	</resultMap>
+
+	<sql id="select-all-column">
+		id ,
+		equipment_id ,
+		batch_no ,
+		battery_charge_high ,
+		battery_charge_low ,
+		battery_charge_out ,
+		battery_discharge_out ,
+		battery_discharge_high ,
+		battery_discharge_low ,
+		voltage_high ,
+		voltage_low ,
+		voltage_difference ,
+		temperature_difference ,
+		one_battery_voltage_out ,
+		one_battery_voltage_low ,
+		soc_low ,
+		soc_high ,
+		soc_jump ,
+		resistance ,
+		dc_status ,
+		high_lock ,
+		collection_time ,
+		addtime
+	</sql>
+
+	<sql id="where-all-page-condition">
+		<if test="f.id != null">
+			AND id = #{f.id}
+		</if>
+		<if test="f.equipmentId != null and f.equipmentId != ''">
+			AND equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.batchNo != null">
+			AND batch_no = #{f.batchNo}
+		</if>
+		<if test="f.batteryChargeHigh != null">
+			AND battery_charge_high = #{f.batteryChargeHigh}
+		</if>
+		<if test="f.batteryChargeLow != null">
+			AND battery_charge_low = #{f.batteryChargeLow}
+		</if>
+		<if test="f.batteryChargeOut != null">
+			AND battery_charge_out = #{f.batteryChargeOut}
+		</if>
+		<if test="f.batteryDischargeOut != null">
+			AND battery_discharge_out = #{f.batteryDischargeOut}
+		</if>
+		<if test="f.batteryDischargeHigh != null">
+			AND battery_discharge_high = #{f.batteryDischargeHigh}
+		</if>
+		<if test="f.batteryDischargeLow != null">
+			AND battery_discharge_low = #{f.batteryDischargeLow}
+		</if>
+		<if test="f.voltageHigh != null">
+			AND voltage_high = #{f.voltageHigh}
+		</if>
+		<if test="f.voltageLow != null">
+			AND voltage_low = #{f.voltageLow}
+		</if>
+		<if test="f.voltageDifference != null">
+			AND voltage_difference = #{f.voltageDifference}
+		</if>
+		<if test="f.temperatureDifference != null">
+			AND temperature_difference = #{f.temperatureDifference}
+		</if>
+		<if test="f.oneBatteryVoltageOut != null">
+			AND one_battery_voltage_out = #{f.oneBatteryVoltageOut}
+		</if>
+		<if test="f.oneBatteryVoltageLow != null">
+			AND one_battery_voltage_low = #{f.oneBatteryVoltageLow}
+		</if>
+		<if test="f.socLow != null">
+			AND soc_low = #{f.socLow}
+		</if>
+		<if test="f.socHigh != null">
+			AND soc_high = #{f.socHigh}
+		</if>
+		<if test="f.socJump != null">
+			AND soc_jump = #{f.socJump}
+		</if>
+		<if test="f.resistance != null">
+			AND resistance = #{f.resistance}
+		</if>
+		<if test="f.dcStatus != null">
+			AND dc_status = #{f.dcStatus}
+		</if>
+		<if test="f.highLock != null">
+			AND high_lock = #{f.highLock}
+		</if>
+		<if test="f.collectionTime != null">
+			AND collection_time = #{f.collectionTime}
+		</if>
+		<if test="f.addtime != null">
+			AND addtime = #{f.addtime}
+		</if>
+	</sql>
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="batteryChargeHigh != null">
+			AND battery_charge_high = #{batteryChargeHigh}
+		</if>
+		<if test="batteryChargeLow != null">
+			AND battery_charge_low = #{batteryChargeLow}
+		</if>
+		<if test="batteryChargeOut != null">
+			AND battery_charge_out = #{batteryChargeOut}
+		</if>
+		<if test="batteryDischargeOut != null">
+			AND battery_discharge_out = #{batteryDischargeOut}
+		</if>
+		<if test="batteryDischargeHigh != null">
+			AND battery_discharge_high = #{batteryDischargeHigh}
+		</if>
+		<if test="batteryDischargeLow != null">
+			AND battery_discharge_low = #{batteryDischargeLow}
+		</if>
+		<if test="voltageHigh != null">
+			AND voltage_high = #{voltageHigh}
+		</if>
+		<if test="voltageLow != null">
+			AND voltage_low = #{voltageLow}
+		</if>
+		<if test="voltageDifference != null">
+			AND voltage_difference = #{voltageDifference}
+		</if>
+		<if test="temperatureDifference != null">
+			AND temperature_difference = #{temperatureDifference}
+		</if>
+		<if test="oneBatteryVoltageOut != null">
+			AND one_battery_voltage_out = #{oneBatteryVoltageOut}
+		</if>
+		<if test="oneBatteryVoltageLow != null">
+			AND one_battery_voltage_low = #{oneBatteryVoltageLow}
+		</if>
+		<if test="socLow != null">
+			AND soc_low = #{socLow}
+		</if>
+		<if test="socHigh != null">
+			AND soc_high = #{socHigh}
+		</if>
+		<if test="socJump != null">
+			AND soc_jump = #{socJump}
+		</if>
+		<if test="resistance != null">
+			AND resistance = #{resistance}
+		</if>
+		<if test="dcStatus != null">
+			AND dc_status = #{dcStatus}
+		</if>
+		<if test="highLock != null">
+			AND high_lock = #{highLock}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- query list with page -->
+	<select id="selectEquipmenwarnListByPageCond" resultMap="equipmenwarnMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_WARN WHERE 1=1
+		<include refid="where-all-page-condition" />
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmenwarnListTotalCount" resultType="int">
+		SELECT COUNT(id)
+		FROM T_EQUIPMENT_WARN
+		WHERE 1=1
+		<include refid="where-all-page-condition" />
+	</select>
+
+	<!-- query list without page -->
+	<select id="selectEquipmenwarnListByCond" resultMap="equipmenwarnMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_WARN WHERE 1=1
+		<include refid="where-all-condition" />
+	</select>
+
+	<!-- query record -->
+	<select id="selectEquipmenwarnByCond" resultMap="equipmenwarnMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_WARN WHERE 1=1
+		<include refid="where-all-condition" />
+		LIMIT 1
+	</select>
+
+</mapper>

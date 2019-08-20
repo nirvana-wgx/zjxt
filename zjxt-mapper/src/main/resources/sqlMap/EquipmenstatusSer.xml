@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenstatusSer">
+	<resultMap id="equipmenstatusMapResult" type="com.ctevs.po.EquipmenstatusEntity">
+		<result column="id" property="id" /> <!-- 序列 -->
+		<result column="equipment_id" property="equipmentId" /> <!-- 设备ID 12位 -->
+		<result column="batch_no" property="batchNo" /> <!-- 设备数据批次号 -->
+		<result column="status" property="status" /> <!-- 设备状态 -->
+		<result column="status_code" property="statusCode" /> <!-- 状态功能码 -->
+		<result column="failure" property="failure" /> <!-- 设备故障等级 -->
+		<result column="positive_relay_status" property="positiveRelayStatus" /> <!-- 总正继电器状态 -->
+		<result column="negative_relay_status" property="negativeRelayStatus" /> <!-- 总负继电器状态 -->
+		<result column="forecast_relay_status" property="forecastRelayStatus" /> <!-- 预充继电器状态 -->
+		<result column="battery_no" property="batteryNo" /> <!-- 电池簇编号 -->
+		<result column="battery_number" property="batteryNumber" /> <!-- 可充电储能子系统个数 -->
+		<result column="sys_voltage" property="sysVoltage" /> <!-- 系统电压 -->
+		<result column="sys_probe" property="sysProbe" /> <!-- 系统电流 -->
+		<result column="sys_resistance" property="sysResistance" /> <!-- 系统绝缘电阻 -->
+		<result column="battery_positive_resistance" property="batteryPositiveResistance" /> <!-- 电池包正极对地绝缘电阻 -->
+		<result column="battery_negative_resistance" property="batteryNegativeResistance" /> <!-- 电池包负极对地绝缘电阻 -->
+		<result column="soc" property="soc" /> <!-- SOC -->
+		<result column="charge_number" property="chargeNumber" /> <!-- 总充电次数 -->
+		<result column="charge" property="charge" /> <!-- 总充电功率 -->
+		<result column="discharge" property="discharge" /> <!-- 总放电功率 -->
+		<result column="collection_time" property="collectionTime" /> <!-- 信息采集时间 -->
+		<result column="addtime" property="addtime" /> <!-- 创建时间 -->
+		<result column="relay_status" property="relayStatus" /> <!-- 继电器状态 -->
+	</resultMap>
+
+	<sql id="select-all-column">
+		id ,
+		equipment_id ,
+		batch_no ,
+		status ,
+		status_code ,
+		failure ,
+		positive_relay_status ,
+		negative_relay_status ,
+		forecast_relay_status ,
+		battery_no ,
+		battery_number ,
+		sys_voltage ,
+		sys_probe ,
+		sys_resistance ,
+		battery_positive_resistance ,
+		battery_negative_resistance ,
+		soc ,
+		charge_number ,
+		charge ,
+		discharge ,
+		collection_time ,
+		addtime ,
+		relay_status
+	</sql>
+
+	<sql id="where-all-page-condition">
+		<if test="f.id != null">
+			AND id = #{f.id}
+		</if>
+		<if test="f.equipmentId != null and f.equipmentId != ''">
+			AND equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.batchNo != null">
+			AND batch_no = #{f.batchNo}
+		</if>
+		<if test="f.status != null">
+			AND status = #{f.status}
+		</if>
+		<if test="f.statusCode != null">
+			AND status_code = #{f.statusCode}
+		</if>
+		<if test="f.failure != null">
+			AND failure = #{f.failure}
+		</if>
+		<if test="f.positiveRelayStatus != null">
+			AND positive_relay_status = #{f.positiveRelayStatus}
+		</if>
+		<if test="f.negativeRelayStatus != null">
+			AND negative_relay_status = #{f.negativeRelayStatus}
+		</if>
+		<if test="f.forecastRelayStatus != null">
+			AND forecast_relay_status = #{f.forecastRelayStatus}
+		</if>
+		<if test="f.batteryNo != null">
+			AND battery_no = #{f.batteryNo}
+		</if>
+		<if test="f.batteryNumber != null">
+			AND battery_number = #{f.batteryNumber}
+		</if>
+		<if test="f.sysVoltage != null">
+			AND sys_voltage = #{f.sysVoltage}
+		</if>
+		<if test="f.sysProbe != null">
+			AND sys_probe = #{f.sysProbe}
+		</if>
+		<if test="f.sysResistance != null">
+			AND sys_resistance = #{f.sysResistance}
+		</if>
+		<if test="f.batteryPositiveResistance != null">
+			AND battery_positive_resistance = #{f.batteryPositiveResistance}
+		</if>
+		<if test="f.batteryNegativeResistance != null">
+			AND battery_negative_resistance = #{f.batteryNegativeResistance}
+		</if>
+		<if test="f.soc != null">
+			AND soc = #{f.soc}
+		</if>
+		<if test="f.chargeNumber != null">
+			AND charge_number = #{f.chargeNumber}
+		</if>
+		<if test="f.charge != null">
+			AND charge = #{f.charge}
+		</if>
+		<if test="f.discharge != null">
+			AND discharge = #{f.discharge}
+		</if>
+		<if test="f.collectionTime != null">
+			AND collection_time = #{f.collectionTime}
+		</if>
+		<if test="f.addtime != null">
+			AND addtime = #{f.addtime}
+		</if>
+		<if test="f.relayStatus != null">
+			AND relay_status = #{f.relayStatus}
+		</if>
+	</sql>
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="status != null">
+			AND status = #{status}
+		</if>
+		<if test="statusCode != null">
+			AND status_code = #{statusCode}
+		</if>
+		<if test="failure != null">
+			AND failure = #{failure}
+		</if>
+		<if test="positiveRelayStatus != null">
+			AND positive_relay_status = #{positiveRelayStatus}
+		</if>
+		<if test="negativeRelayStatus != null">
+			AND negative_relay_status = #{negativeRelayStatus}
+		</if>
+		<if test="forecastRelayStatus != null">
+			AND forecast_relay_status = #{forecastRelayStatus}
+		</if>
+		<if test="batteryNo != null">
+			AND battery_no = #{batteryNo}
+		</if>
+		<if test="batteryNumber != null">
+			AND battery_number = #{batteryNumber}
+		</if>
+		<if test="sysVoltage != null">
+			AND sys_voltage = #{sysVoltage}
+		</if>
+		<if test="sysProbe != null">
+			AND sys_probe = #{sysProbe}
+		</if>
+		<if test="sysResistance != null">
+			AND sys_resistance = #{sysResistance}
+		</if>
+		<if test="batteryPositiveResistance != null">
+			AND battery_positive_resistance = #{batteryPositiveResistance}
+		</if>
+		<if test="batteryNegativeResistance != null">
+			AND battery_negative_resistance = #{batteryNegativeResistance}
+		</if>
+		<if test="soc != null">
+			AND soc = #{soc}
+		</if>
+		<if test="chargeNumber != null">
+			AND charge_number = #{chargeNumber}
+		</if>
+		<if test="charge != null">
+			AND charge = #{charge}
+		</if>
+		<if test="discharge != null">
+			AND discharge = #{discharge}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+		<if test="relayStatus != null">
+			AND relay_status = #{relayStatus}
+		</if>
+	</sql>
+
+	<!-- query list with page -->
+	<select id="selectEquipmenstatusListByPageCond" resultMap="equipmenstatusMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_STATUS WHERE 1=1
+		<include refid="where-all-page-condition" />
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmenstatusListTotalCount" resultType="int">
+		SELECT COUNT(id)
+		FROM T_EQUIPMENT_STATUS
+		WHERE 1=1
+		<include refid="where-all-page-condition" />
+	</select>
+
+	<!-- query list without page -->
+	<select id="selectEquipmenstatusListByCond" resultMap="equipmenstatusMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_STATUS WHERE 1=1
+		<include refid="where-all-condition" />
+	</select>
+
+	<!-- query record -->
+	<select id="selectEquipmenstatusByCond" resultMap="equipmenstatusMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT_STATUS WHERE 1=1
+		<include refid="where-all-condition" />
+		LIMIT 1
+	</select>
+
+</mapper>

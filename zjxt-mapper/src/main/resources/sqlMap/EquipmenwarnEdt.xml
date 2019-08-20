@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenwarnEdt">
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="batteryChargeHigh != null">
+			AND battery_charge_high = #{batteryChargeHigh}
+		</if>
+		<if test="batteryChargeLow != null">
+			AND battery_charge_low = #{batteryChargeLow}
+		</if>
+		<if test="batteryChargeOut != null">
+			AND battery_charge_out = #{batteryChargeOut}
+		</if>
+		<if test="batteryDischargeOut != null">
+			AND battery_discharge_out = #{batteryDischargeOut}
+		</if>
+		<if test="batteryDischargeHigh != null">
+			AND battery_discharge_high = #{batteryDischargeHigh}
+		</if>
+		<if test="batteryDischargeLow != null">
+			AND battery_discharge_low = #{batteryDischargeLow}
+		</if>
+		<if test="voltageHigh != null">
+			AND voltage_high = #{voltageHigh}
+		</if>
+		<if test="voltageLow != null">
+			AND voltage_low = #{voltageLow}
+		</if>
+		<if test="voltageDifference != null">
+			AND voltage_difference = #{voltageDifference}
+		</if>
+		<if test="temperatureDifference != null">
+			AND temperature_difference = #{temperatureDifference}
+		</if>
+		<if test="oneBatteryVoltageOut != null">
+			AND one_battery_voltage_out = #{oneBatteryVoltageOut}
+		</if>
+		<if test="oneBatteryVoltageLow != null">
+			AND one_battery_voltage_low = #{oneBatteryVoltageLow}
+		</if>
+		<if test="socLow != null">
+			AND soc_low = #{socLow}
+		</if>
+		<if test="socHigh != null">
+			AND soc_high = #{socHigh}
+		</if>
+		<if test="socJump != null">
+			AND soc_jump = #{socJump}
+		</if>
+		<if test="resistance != null">
+			AND resistance = #{resistance}
+		</if>
+		<if test="dcStatus != null">
+			AND dc_status = #{dcStatus}
+		</if>
+		<if test="highLock != null">
+			AND high_lock = #{highLock}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- insert record -->
+	<insert id="insertEquipmenwarn" parameterType="com.ctevs.po.EquipmenwarnEntity">
+		<selectKey resultType="java.math.BigInteger" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO T_EQUIPMENT_WARN (
+		id,
+		equipment_id,
+		batch_no,
+		battery_charge_high,
+		battery_charge_low,
+		battery_charge_out,
+		battery_discharge_out,
+		battery_discharge_high,
+		battery_discharge_low,
+		voltage_high,
+		voltage_low,
+		voltage_difference,
+		temperature_difference,
+		one_battery_voltage_out,
+		one_battery_voltage_low,
+		soc_low,
+		soc_high,
+		soc_jump,
+		resistance,
+		dc_status,
+		high_lock,
+		collection_time,
+		addtime
+		) VALUES (
+		#{id} ,
+		#{equipmentId} ,
+		#{batchNo} ,
+		#{batteryChargeHigh} ,
+		#{batteryChargeLow} ,
+		#{batteryChargeOut} ,
+		#{batteryDischargeOut} ,
+		#{batteryDischargeHigh} ,
+		#{batteryDischargeLow} ,
+		#{voltageHigh} ,
+		#{voltageLow} ,
+		#{voltageDifference} ,
+		#{temperatureDifference} ,
+		#{oneBatteryVoltageOut} ,
+		#{oneBatteryVoltageLow} ,
+		#{socLow} ,
+		#{socHigh} ,
+		#{socJump} ,
+		#{resistance} ,
+		#{dcStatus} ,
+		#{highLock} ,
+		#{collectionTime} ,
+		#{addtime}
+		)
+	</insert>
+
+	<!-- update record -->
+	<update id="updateEquipmenwarnByPrimaryKey" parameterType="com.ctevs.po.EquipmenwarnEntity">
+		UPDATE T_EQUIPMENT_WARN
+		<set>
+			<if test="equipmentId != null">
+				equipment_id = #{equipmentId} ,
+			</if>
+			<if test="batchNo != null">
+				batch_no = #{batchNo} ,
+			</if>
+			<if test="batteryChargeHigh != null">
+				battery_charge_high = #{batteryChargeHigh} ,
+			</if>
+			<if test="batteryChargeLow != null">
+				battery_charge_low = #{batteryChargeLow} ,
+			</if>
+			<if test="batteryChargeOut != null">
+				battery_charge_out = #{batteryChargeOut} ,
+			</if>
+			<if test="batteryDischargeOut != null">
+				battery_discharge_out = #{batteryDischargeOut} ,
+			</if>
+			<if test="batteryDischargeHigh != null">
+				battery_discharge_high = #{batteryDischargeHigh} ,
+			</if>
+			<if test="batteryDischargeLow != null">
+				battery_discharge_low = #{batteryDischargeLow} ,
+			</if>
+			<if test="voltageHigh != null">
+				voltage_high = #{voltageHigh} ,
+			</if>
+			<if test="voltageLow != null">
+				voltage_low = #{voltageLow} ,
+			</if>
+			<if test="voltageDifference != null">
+				voltage_difference = #{voltageDifference} ,
+			</if>
+			<if test="temperatureDifference != null">
+				temperature_difference = #{temperatureDifference} ,
+			</if>
+			<if test="oneBatteryVoltageOut != null">
+				one_battery_voltage_out = #{oneBatteryVoltageOut} ,
+			</if>
+			<if test="oneBatteryVoltageLow != null">
+				one_battery_voltage_low = #{oneBatteryVoltageLow} ,
+			</if>
+			<if test="socLow != null">
+				soc_low = #{socLow} ,
+			</if>
+			<if test="socHigh != null">
+				soc_high = #{socHigh} ,
+			</if>
+			<if test="socJump != null">
+				soc_jump = #{socJump} ,
+			</if>
+			<if test="resistance != null">
+				resistance = #{resistance} ,
+			</if>
+			<if test="dcStatus != null">
+				dc_status = #{dcStatus} ,
+			</if>
+			<if test="highLock != null">
+				high_lock = #{highLock} ,
+			</if>
+			<if test="collectionTime != null">
+				collection_time = #{collectionTime} ,
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime}
+			</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+
+	<!-- delete record -->
+	<delete id="deleteEquipmenwarn" parameterType="com.ctevs.po.EquipmenwarnEntity">
+		DELETE FROM T_EQUIPMENT_WARN
+		WHERE 1=1
+		<include refid="where-all-condition" />
+	</delete>
+
+	<!-- delete record -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+		DELETE FROM T_EQUIPMENT_WARN
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

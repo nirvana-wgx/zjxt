@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenstatusEdt">
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="status != null">
+			AND status = #{status}
+		</if>
+		<if test="statusCode != null">
+			AND status_code = #{statusCode}
+		</if>
+		<if test="failure != null">
+			AND failure = #{failure}
+		</if>
+		<if test="positiveRelayStatus != null">
+			AND positive_relay_status = #{positiveRelayStatus}
+		</if>
+		<if test="negativeRelayStatus != null">
+			AND negative_relay_status = #{negativeRelayStatus}
+		</if>
+		<if test="forecastRelayStatus != null">
+			AND forecast_relay_status = #{forecastRelayStatus}
+		</if>
+		<if test="batteryNo != null">
+			AND battery_no = #{batteryNo}
+		</if>
+		<if test="batteryNumber != null">
+			AND battery_number = #{batteryNumber}
+		</if>
+		<if test="sysVoltage != null">
+			AND sys_voltage = #{sysVoltage}
+		</if>
+		<if test="sysProbe != null">
+			AND sys_probe = #{sysProbe}
+		</if>
+		<if test="sysResistance != null">
+			AND sys_resistance = #{sysResistance}
+		</if>
+		<if test="batteryPositiveResistance != null">
+			AND battery_positive_resistance = #{batteryPositiveResistance}
+		</if>
+		<if test="batteryNegativeResistance != null">
+			AND battery_negative_resistance = #{batteryNegativeResistance}
+		</if>
+		<if test="soc != null">
+			AND soc = #{soc}
+		</if>
+		<if test="chargeNumber != null">
+			AND charge_number = #{chargeNumber}
+		</if>
+		<if test="charge != null">
+			AND charge = #{charge}
+		</if>
+		<if test="discharge != null">
+			AND discharge = #{discharge}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+		<if test="relayStatus != null">
+			AND relay_status = #{relayStatus}
+		</if>
+	</sql>
+
+	<!-- insert record -->
+	<insert id="insertEquipmenstatus" parameterType="com.ctevs.po.EquipmenstatusEntity">
+		<selectKey resultType="java.math.BigInteger" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO T_EQUIPMENT_STATUS (
+		id,
+		equipment_id,
+		batch_no,
+		status,
+		status_code,
+		failure,
+		positive_relay_status,
+		negative_relay_status,
+		forecast_relay_status,
+		battery_no,
+		battery_number,
+		sys_voltage,
+		sys_probe,
+		sys_resistance,
+		battery_positive_resistance,
+		battery_negative_resistance,
+		soc,
+		charge_number,
+		charge,
+		discharge,
+		collection_time,
+		addtime,
+		relay_status
+		) VALUES (
+		#{id} ,
+		#{equipmentId} ,
+		#{batchNo} ,
+		#{status} ,
+		#{statusCode} ,
+		#{failure} ,
+		#{positiveRelayStatus} ,
+		#{negativeRelayStatus} ,
+		#{forecastRelayStatus} ,
+		#{batteryNo} ,
+		#{batteryNumber} ,
+		#{sysVoltage} ,
+		#{sysProbe} ,
+		#{sysResistance} ,
+		#{batteryPositiveResistance} ,
+		#{batteryNegativeResistance} ,
+		#{soc} ,
+		#{chargeNumber} ,
+		#{charge} ,
+		#{discharge} ,
+		#{collectionTime} ,
+		#{addtime} ,
+		#{relayStatus}
+		)
+	</insert>
+
+	<!-- update record -->
+	<update id="updateEquipmenstatusByPrimaryKey" parameterType="com.ctevs.po.EquipmenstatusEntity">
+		UPDATE T_EQUIPMENT_STATUS
+		<set>
+			<if test="equipmentId != null">
+				equipment_id = #{equipmentId} ,
+			</if>
+			<if test="batchNo != null">
+				batch_no = #{batchNo} ,
+			</if>
+			<if test="status != null">
+				status = #{status} ,
+			</if>
+			<if test="statusCode != null">
+				status_code = #{statusCode} ,
+			</if>
+			<if test="failure != null">
+				failure = #{failure} ,
+			</if>
+			<if test="positiveRelayStatus != null">
+				positive_relay_status = #{positiveRelayStatus} ,
+			</if>
+			<if test="negativeRelayStatus != null">
+				negative_relay_status = #{negativeRelayStatus} ,
+			</if>
+			<if test="forecastRelayStatus != null">
+				forecast_relay_status = #{forecastRelayStatus} ,
+			</if>
+			<if test="batteryNo != null">
+				battery_no = #{batteryNo} ,
+			</if>
+			<if test="batteryNumber != null">
+				battery_number = #{batteryNumber} ,
+			</if>
+			<if test="sysVoltage != null">
+				sys_voltage = #{sysVoltage} ,
+			</if>
+			<if test="sysProbe != null">
+				sys_probe = #{sysProbe} ,
+			</if>
+			<if test="sysResistance != null">
+				sys_resistance = #{sysResistance} ,
+			</if>
+			<if test="batteryPositiveResistance != null">
+				battery_positive_resistance = #{batteryPositiveResistance} ,
+			</if>
+			<if test="batteryNegativeResistance != null">
+				battery_negative_resistance = #{batteryNegativeResistance} ,
+			</if>
+			<if test="soc != null">
+				soc = #{soc} ,
+			</if>
+			<if test="chargeNumber != null">
+				charge_number = #{chargeNumber} ,
+			</if>
+			<if test="charge != null">
+				charge = #{charge} ,
+			</if>
+			<if test="discharge != null">
+				discharge = #{discharge} ,
+			</if>
+			<if test="collectionTime != null">
+				collection_time = #{collectionTime} ,
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime} ,
+			</if>
+			<if test="relayStatus != null">
+				relay_status = #{relayStatus}
+			</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+
+	<!-- delete record -->
+	<delete id="deleteEquipmenstatus" parameterType="com.ctevs.po.EquipmenstatusEntity">
+		DELETE FROM T_EQUIPMENT_STATUS
+		WHERE 1=1
+		<include refid="where-all-condition" />
+	</delete>
+
+	<!-- delete record -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+		DELETE FROM
+		T_EQUIPMENT_STATUS
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenbatteryVoltageEdt">
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND batch_no = #{batchNo}
+		</if>
+		<if test="batterySysNo != null">
+			AND battery_sys_no = #{batterySysNo}
+		</if>
+		<if test="batteryVolage != null">
+			AND battery_volage = #{batteryVolage}
+		</if>
+		<if test="batteryNumber != null">
+			AND battery_number = #{batteryNumber}
+		</if>
+		<if test="oneBatteryNo != null">
+			AND one_battery_no = #{oneBatteryNo}
+		</if>
+		<if test="oneBatteryVolage != null">
+			AND one_battery_volage = #{oneBatteryVolage}
+		</if>
+		<if test="collectionTime != null">
+			AND collection_time = #{collectionTime}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- insert record -->
+	<insert id="insertEquipmenbatteryVoltage" parameterType="com.ctevs.po.EquipmenbatteryVoltageEntity">
+		<selectKey resultType="java.math.BigInteger" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO T_EQUIPMENT_BATTERY_VOLTAGE (
+		id,
+		equipment_id,
+		batch_no,
+		battery_sys_no,
+		battery_volage,
+		battery_number,
+		one_battery_no,
+		one_battery_volage,
+		collection_time,
+		addtime
+		) VALUES (
+		#{id} ,
+		#{equipmentId} ,
+		#{batchNo} ,
+		#{batterySysNo} ,
+		#{batteryVolage} ,
+		#{batteryNumber} ,
+		#{oneBatteryNo} ,
+		#{oneBatteryVolage} ,
+		#{collectionTime} ,
+		#{addtime}
+		)
+	</insert>
+
+	<!-- update record -->
+	<update id="updateEquipmenbatteryVoltageByPrimaryKey" parameterType="com.ctevs.po.EquipmenbatteryVoltageEntity">
+		UPDATE T_EQUIPMENT_BATTERY_VOLTAGE
+		<set>
+			<if test="equipmentId != null">
+				equipment_id = #{equipmentId} ,
+			</if>
+			<if test="batchNo != null">
+				batch_no = #{batchNo} ,
+			</if>
+			<if test="batterySysNo != null">
+				battery_sys_no = #{batterySysNo} ,
+			</if>
+			<if test="batteryVolage != null">
+				battery_volage = #{batteryVolage} ,
+			</if>
+			<if test="batteryNumber != null">
+				battery_number = #{batteryNumber} ,
+			</if>
+			<if test="oneBatteryNo != null">
+				one_battery_no = #{oneBatteryNo} ,
+			</if>
+			<if test="oneBatteryVolage != null">
+				one_battery_volage = #{oneBatteryVolage} ,
+			</if>
+			<if test="collectionTime != null">
+				collection_time = #{collectionTime} ,
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime}
+			</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+
+	<!-- delete record -->
+	<delete id="deleteEquipmenbatteryVoltage" parameterType="com.ctevs.po.EquipmenbatteryVoltageEntity">
+		DELETE FROM T_EQUIPMENT_BATTERY_VOLTAGE
+		WHERE 1=1
+		<include refid="where-all-condition" />
+	</delete>
+
+	<!-- delete record -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+		DELETE FROM T_EQUIPMENT_BATTERY_VOLTAGE
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

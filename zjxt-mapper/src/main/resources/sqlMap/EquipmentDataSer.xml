@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmentDataSer">
+	<resultMap id="equipmentMapResult" type="com.ctevs.po.EquipmentDataEntity">
+		<result column="equipment_id" property="equipmentId" />
+		<result column="equipment_name" property="equipmentName" />
+		<result column="batch_no" property="batchNo" />
+		<result column="status" property="status" />
+		<result column="status_code" property="statusCode" />
+		<result column="failure" property="failure" />
+		<result column="sys_voltage" property="sysVoltage" />
+		<result column="sys_probe" property="sysProbe" />
+		<result column="soc" property="soc" />
+		<result column="one_battery_voltage_high" property="oneBatteryVoltageHigh" />
+		<result column="one_battery_voltage_low" property="oneBatteryVoltageLow" />
+		<result column="voltage_difference" property="voltageDifference" />
+		<result column="high_temperature" property="highTemperature" />
+		<result column="low_temperature" property="lowTemperature" />
+		<result column="temperature_difference" property="temperatureDifference" />
+		<result column="collection_time" property="collectionTime" />
+	</resultMap>
+
+	<resultMap id="equipmentBatteryMapResult" type="com.ctevs.po.EquipmenbatteryEntity">
+		<result column="equipment_id" property="equipmentId" />
+		<result column="battery_sys_no" property="batterySysNo" />
+		<result column="battery_volage" property="batteryVolage" />
+		<result column="battery_number" property="batteryNumber" />
+		<result column="probe_number" property="probeNumber" />
+	</resultMap>
+
+	<sql id="where-all-page-condition">
+		 <if test="f.equipmentId != null and f.equipmentId != ''">
+				AND t1.equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.status != null">
+			AND t1.status = #{f.status}
+		</if>
+		<if test="f.statusCode != null">
+			AND t1.status_code = #{f.statusCode}
+		</if>
+		<if test="f.failure != null ">
+			AND t1.failure = #{f.failure}
+		</if>
+		<if test="f.oneBatteryVoltageHigh != null">
+			AND t2.one_battery_voltage_high = #{f.oneBatteryVoltageHigh}
+		</if>
+		<if test="f.oneBatteryVoltageLow != null">
+			AND t2.one_battery_voltage_low = #{f.oneBatteryVoltageLow}
+		</if>
+		<if test="f.voltageDifference != null">
+			AND t2.voltage_difference = #{f.voltageDifference}
+		</if>
+		<if test="f.highTemperature != null">
+			AND t2.high_temperature = #{f.highTemperature}
+		</if>
+		<if test="f.lowTemperature != null">
+			AND t2.low_temperature = #{f.lowTemperature}
+		</if>
+		<if test="f.temperatureDifference != null">
+			AND t2.temperature_difference = #{f.temperatureDifference}
+		</if>
+		<if test="f.startDate != null">
+					<![CDATA[
+						AND t1.collection_time >= #{f.startDate}
+					]]>
+		</if>
+		<if test="f.endDate != null">
+					<![CDATA[
+						AND t1.collection_time <= #{f.endDate}
+					]]>
+		</if>
+	</sql>
+	<!-- query list with page -->
+	<select id="selectEquipmentDataNewListByPageCond" resultMap="equipmentMapResult">
+		SELECT
+		t1.equipment_id,
+		t1.equipment_name,
+		t2.soc,
+		t2.sys_voltage,
+		t2.sys_probe,
+		t2.status,
+		t3.one_battery_voltage_high,
+		t3.one_battery_voltage_low,
+		t3.high_temperature,
+		t3.low_temperature,
+		t2.collection_time
+		FROM
+		T_EQUIPMENT t1 LEFT JOIN
+		T_EQUIPMENT_STATUS t2 ON t1.equipment_id=t2.equipment_id
+		LEFT JOIN T_EQUIPMENT_LIMIT t3 ON t1.equipment_id=t3.equipment_id
+		where 1=1 AND t1.state=1
+		<if test="f.equipmentId != null and f.equipmentId != ''">
+				AND t1.equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.equipmentName != null and f.equipmentName != ''">
+				AND t1.equipment_name = #{f.equipmentName}
+		</if>
+		<if test="f.startDate != null">
+					<![CDATA[
+						AND t2.collection_time >= #{f.startDate}
+					]]>
+		</if>
+		<if test="f.endDate != null">
+					<![CDATA[
+						AND t2.collection_time <= #{f.endDate}
+					]]>
+		</if>
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmentDataNewListTotalCount" resultType="int">
+		SELECT COUNT(t1.id)
+		FROM
+		T_EQUIPMENT t1 LEFT JOIN
+		T_EQUIPMENT_STATUS t2 ON t1.equipment_id=t2.equipment_id
+		LEFT JOIN T_EQUIPMENT_LIMIT t3 ON t1.equipment_id=t3.equipment_id
+		where 1=1 AND t1.state=1
+		<if test="f.equipmentId != null and f.equipmentId != ''">
+				AND t1.equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.equipmentName != null and f.equipmentName != ''">
+				AND t1.equipment_name like CONCAT('%',#{f.equipmentName},'%') 
+		</if>
+		<if test="f.startDate != null">
+					<![CDATA[
+						AND t2.collection_time >= #{f.startDate}
+					]]>
+		</if>
+		<if test="f.endDate != null">
+					<![CDATA[
+						AND t2.collection_time <= #{f.endDate}
+					]]>
+		</if>
+	</select>
+	
+	<!-- query list with page -->
+	<select id="selectEquipmentDataListByPageCond" resultMap="equipmentMapResult">
+		select t1.equipment_id,t1.batch_no,t1.status,t1.status_code,t1.failure,t2.one_battery_voltage_high,
+		t2.one_battery_voltage_low,t2.voltage_difference,t2.temperature_difference,
+		t2.high_temperature ,t2.low_temperature,t2.collection_time
+		from
+		T_EQUIPMENT_STATUS t1 INNER JOIN T_EQUIPMENT_LIMIT t2 on t1.batch_no=t2.batch_no and t1.equipment_id=t2.equipment_id
+		where 1=1 and t1.equipment_id in(SELECT t3.equipment_id from T_EQUIPMENT t3 where t3.state=1)
+		<include refid="where-all-page-condition" />
+		order by t2.collection_time desc
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmentDataListTotalCount" resultType="int">
+		SELECT COUNT(t1.id)
+		from
+		T_EQUIPMENT_STATUS t1 INNER JOIN T_EQUIPMENT_LIMIT t2 on t1.batch_no=t2.batch_no and t1.equipment_id=t2.equipment_id
+		where 1=1 and t1.equipment_id in(SELECT t3.equipment_id from T_EQUIPMENT t3 where t3.state=1)
+		<include refid="where-all-page-condition" />
+	</select>
+
+	<select id="selectEquipmentBatteryDataListByCond" resultMap="equipmentBatteryMapResult">
+		select DISTINCT t1.battery_sys_no,t1.battery_volage,t1.battery_number,t2.probe_number
+		FROM T_EQUIPMENT_BATTERY_VOLTAGE t1 INNER JOIN T_EQUIPMENT_BATTERY_PROBE
+		t2 ON t1.equipment_id=t2.equipment_id AND t1.batch_no=t2.batch_no
+		where 1=1
+		<if test="equipmentId != null">
+			AND t1.equipment_id = #{equipmentId}
+		</if>
+		<if test="batchNo != null">
+			AND t1.batch_no = #{batchNo}
+		</if>
+	</select>
+
+	<update id="copyTableStatus" parameterType="java.lang.String">
+		 CREATE TABLE IF NOT EXISTS T_EQUIPMENT_STATUS (
+			   	  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '序列',
+				  `equipment_id` varchar(12) COLLATE utf8_bin NOT NULL COMMENT '设备ID 12位',
+				  `batch_no` bigint(20) NOT NULL COMMENT '设备数据批次号',
+				  `status` int(11) DEFAULT NULL COMMENT '设备状态',
+				  `status_code` int(11) DEFAULT NULL COMMENT '状态功能码',
+				  `failure` int(11) DEFAULT NULL COMMENT '设备故障等级',
+				  `positive_relay_status` int(11) DEFAULT NULL COMMENT '总正继电器状态',
+				  `negative_relay_status` int(11) DEFAULT NULL COMMENT '总负继电器状态',
+				  `forecast_relay_status` int(11) DEFAULT NULL COMMENT '预充继电器状态',
+				  `battery_no` int(11) DEFAULT NULL COMMENT '电池簇编号',
+				  `battery_number` int(11) DEFAULT NULL COMMENT '可充电储能子系统个数',
+				  `sys_voltage` decimal(10,3) DEFAULT NULL COMMENT '系统电压',
+				  `sys_probe` decimal(10,3) DEFAULT NULL COMMENT '系统电流',
+				  `sys_resistance` int(11) DEFAULT NULL COMMENT '系统绝缘电阻',
+				  `battery_positive_resistance` int(11) DEFAULT NULL COMMENT '电池包正极对地绝缘电阻',
+				  `battery_negative_resistance` int(11) DEFAULT NULL COMMENT '电池包负极对地绝缘电阻',
+				  `soc` decimal(10,3) DEFAULT NULL COMMENT 'SOC',
+				  `charge_number` int(11) DEFAULT NULL COMMENT '总充电次数',
+				  `charge` decimal(10,3) DEFAULT NULL COMMENT '总充电次数',
+				  `discharge` decimal(10,3) DEFAULT NULL COMMENT '总放电功率',
+				  `collection_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息采集时间',
+				  `addtime` datetime NOT NULL COMMENT '创建时间',
+				  `relay_status` varchar(32) COLLATE utf8_bin DEFAULT '00000000' COMMENT '继电器状态',
+				  PRIMARY KEY (`id`),
+				  KEY `index_eq_no` (`equipment_id`,`batch_no`)
+			) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='设备状态表'
+		 
+	</update>
+
+	<update id="copyTableLimit" parameterType="java.lang.String">
+			CREATE TABLE IF NOT EXISTS T_EQUIPMENT_LIMIT (
+				 `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '序列',
+				  `equipment_id` varchar(12) COLLATE utf8_bin NOT NULL COMMENT '设备ID 12位',
+				  `batch_no` bigint(20) NOT NULL COMMENT '设备数据批次号',
+				  `high_voltage_sys_no` int(11) NOT NULL COMMENT '最高电压电池子系统号',
+				  `high_voltage_one_battery_no` int(11) NOT NULL COMMENT '最高电压电池单体代号',
+				  `low_voltage_sys_no` int(11) DEFAULT NULL COMMENT '最低电压电池子系统号',
+				  `low_voltage_one_battery_no` int(11) DEFAULT NULL COMMENT '最低电压电池单体代号',
+				  `one_battery_voltage_high` decimal(10,3) DEFAULT NULL COMMENT '电池单体电压最高值',
+				  `one_battery_voltage_low` decimal(10,3) DEFAULT NULL COMMENT '电池单体电压最低值',
+				  `high_temperature_sys_no` int(11) DEFAULT NULL COMMENT '最高温度子系统号',
+				  `high_temperature_probe_no` int(11) DEFAULT NULL COMMENT '最高温度探针序号',
+				  `high_temperature` decimal(10,3) DEFAULT NULL COMMENT '最高温度值',
+				  `low_temperature_sys_no` int(11) DEFAULT NULL COMMENT '最低温度子系统号',
+				  `low_temperature_probe_no` int(11) DEFAULT NULL COMMENT '最低温度探针序号',
+				  `low_temperature` decimal(10,3) DEFAULT NULL COMMENT '最低温度值',
+				  `voltage_difference` decimal(10,3) DEFAULT NULL COMMENT '压差值',
+				  `temperature_difference` decimal(10,3) DEFAULT NULL COMMENT '温差值',
+				  `collection_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息采集时间',
+				  `addtime` datetime NOT NULL COMMENT '创建时间',
+				  PRIMARY KEY (`id`),
+				  KEY `index_eq_no` (`equipment_id`,`batch_no`)
+			) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='设备极值表'
+	</update>
+
+	<update id="copyTableWarn" parameterType="java.lang.String">
+		 CREATE TABLE  IF NOT EXISTS T_EQUIPMENT_WARN (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '序列',
+			  `equipment_id` varchar(12) COLLATE utf8_bin NOT NULL COMMENT '设备ID 12位',
+			  `batch_no` bigint(20) NOT NULL COMMENT '设备数据批次号',
+			  `battery_charge_high` int(11) DEFAULT NULL COMMENT '电池充电高温报警',
+			  `battery_charge_low` int(11) DEFAULT NULL COMMENT '电池充电低温报警，',
+			  `battery_charge_out` int(11) DEFAULT NULL COMMENT '电池充电过流报警，',
+			  `battery_discharge_out` int(11) DEFAULT NULL COMMENT '电池放电过流报警，',
+			  `battery_discharge_high` int(11) DEFAULT NULL COMMENT '电池放电高温报警，',
+			  `battery_discharge_low` int(11) DEFAULT NULL COMMENT '电池放电低温报警，',
+			  `voltage_high` int(11) DEFAULT NULL COMMENT '总压过压报警，',
+			  `voltage_low` int(11) DEFAULT NULL COMMENT '总压欠压报警，',
+			  `voltage_difference` int(11) DEFAULT NULL COMMENT '总压温差报警，',
+			  `temperature_difference` int(11) DEFAULT NULL COMMENT '总温差报警，',
+			  `one_battery_voltage_out` int(11) DEFAULT NULL COMMENT '单体电池过压报警',
+			  `one_battery_voltage_low` int(11) DEFAULT NULL COMMENT '单体电池欠压报警',
+			  `soc_low` int(11) DEFAULT NULL COMMENT 'SOC过低报警',
+			  `soc_high` int(11) DEFAULT NULL COMMENT 'SOC过高报警',
+			  `soc_jump` int(11) DEFAULT NULL COMMENT 'SOC跳变报警，',
+			  `resistance` int(11) DEFAULT NULL COMMENT '绝缘报警，',
+			  `dc_status` int(11) DEFAULT NULL COMMENT 'DC-DC状态报警',
+			  `high_lock` int(11) DEFAULT NULL COMMENT '高压互锁状态报警，',
+			  `collection_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息采集时间',
+			  `addtime` datetime NOT NULL COMMENT '创建时间',
+			  PRIMARY KEY (`id`),
+			  KEY `index_eq_no` (`equipment_id`,`batch_no`)
+			) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='设备报警表'
+	</update>
+
+	<update id="copyTableBatteryProbe" parameterType="java.lang.String">
+		CREATE TABLE IF NOT EXISTS T_EQUIPMENT_BATTERY_PROBE (
+		      `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '序列',
+			  `equipment_id` varchar(12) COLLATE utf8_bin NOT NULL COMMENT '设备ID 12位',
+			  `batch_no` bigint(20) NOT NULL COMMENT '设备数据批次号',
+			  `battery_sys_no` int(11) NOT NULL COMMENT '可充电储能子系统编号',
+			  `probe_number` int(11) NOT NULL COMMENT '可充电储能温度探针个数（Nt）',
+			  `one_probe_no` int(11) NOT NULL COMMENT '单体探针编号',
+			  `one_probe_temperature` decimal(10,3) NOT NULL COMMENT '单体探针温度',
+			  `collection_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息采集时间',
+			  `addtime` datetime NOT NULL COMMENT '创建时间',
+			  PRIMARY KEY (`id`),
+			  KEY `index_eq_sys_no` (`equipment_id`,`batch_no`,`battery_sys_no`)
+		) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='设备电池包探针表' 
+	</update>
+
+	<update id="copyTableBatteryVoltage" parameterType="java.lang.String">
+		 CREATE TABLE IF NOT EXISTS T_EQUIPMENT_BATTERY_VOLTAGE (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '序列',
+			  `equipment_id` varchar(12) COLLATE utf8_bin NOT NULL COMMENT '设备ID 12位',
+			  `batch_no` bigint(20) NOT NULL COMMENT '设备数据批次号',
+			  `battery_sys_no` int(11) NOT NULL COMMENT '可充电储能子系统编号',
+			  `battery_volage` decimal(10,3) NOT NULL COMMENT '可充电储能装置总电压',
+			  `battery_number` int(11) NOT NULL COMMENT '电池总数（Nv）',
+			  `one_battery_no` int(11) NOT NULL COMMENT '单体电池编号',
+			  `one_battery_volage` decimal(10,3) NOT NULL COMMENT '单体电池电压',
+			  `collection_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息采集时间',
+			  `addtime` datetime NOT NULL COMMENT '创建时间',
+			  PRIMARY KEY (`id`),
+			  KEY `index_eq_sys_no` (`equipment_id`,`batch_no`,`battery_sys_no`) USING BTREE
+			) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='设备电池包电压表'
+	</update>
+
+</mapper>

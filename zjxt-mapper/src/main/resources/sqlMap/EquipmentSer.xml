@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmentSer">
+	<resultMap id="equipmentMapResult" type="com.ctevs.po.EquipmentEntity">
+		<result column="id" property="id" /> <!-- 序列 -->
+		<result column="equipment_id" property="equipmentId" /> <!-- 设备ID -->
+		<result column="equipment_name" property="equipmentName" /> <!-- 设备名称 -->
+		<result column="equipment_group" property="equipmentGroup" /> <!-- 设备组表 -->
+		<result column="state" property="state" /> <!-- 状态0=离线,1=在线,2=删除 -->
+		<result column="adduserid" property="adduserid" /> <!-- 创建用户 -->
+		<result column="addtime" property="addtime" /> <!-- 创建时间 -->
+		<result column="updateuserid" property="updateuserid" /> <!-- 修改用户 -->
+		<result column="updatetime" property="updatetime" /> <!-- 修改时间 -->
+		<result column="last_collect_time" property="lastCollectTime" /> <!-- 最新采集时间 -->
+		<result column="equipment_soft_version" property="equipmentSoftVersion" /> <!-- 软件版本号 -->
+		<result column="equipment_hardware_version" property="equipmentHardwareVersion" /> <!-- 硬件版本号 -->
+	</resultMap>
+
+	<sql id="select-all-column">
+		id ,
+		equipment_id ,
+		equipment_name ,
+		equipment_group ,
+		state ,
+		adduserid ,
+		addtime ,
+		updateuserid ,
+		updatetime ,
+		last_collect_time ,
+		equipment_soft_version ,
+		equipment_hardware_version
+	</sql>
+
+	<sql id="where-all-page-condition">
+		<if test="f.id != null">
+			AND id = #{f.id}
+		</if>
+		<if test="f.equipmentId != null and f.equipmentId != ''">
+			AND equipment_id = #{f.equipmentId}
+		</if>
+		<if test="f.equipmentName != null and f.equipmentName != ''">
+			AND equipment_name = #{f.equipmentName}
+		</if>
+		<if test="f.equipmentGroup != null">
+			AND equipment_group = #{f.equipmentGroup}
+		</if>
+		<if test="f.state != null">
+			AND state = #{f.state}
+		</if>
+		<if test="f.adduserid != null">
+			AND adduserid = #{f.adduserid}
+		</if>
+		<if test="f.addtime != null">
+			AND addtime = #{f.addtime}
+		</if>
+		<if test="f.updateuserid != null">
+			AND updateuserid = #{f.updateuserid}
+		</if>
+		<if test="f.updatetime != null">
+			AND updatetime = #{f.updatetime}
+		</if>
+		<if test="f.lastCollectTime != null">
+			AND last_collect_time = #{f.lastCollectTime}
+		</if>
+		<if test="f.equipmentSoftVersion != null and f.equipmentSoftVersion != ''">
+			AND equipment_soft_version = #{f.equipmentSoftVersion}
+		</if>
+		<if
+			test="f.equipmentHardwareVersion != null and f.equipmentHardwareVersion != ''">
+			AND equipment_hardware_version = #{f.equipmentHardwareVersion}
+		</if>
+	</sql>
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentId != null and equipmentId != ''">
+			AND equipment_id = #{equipmentId}
+		</if>
+		<if test="equipmentName != null and equipmentName != ''">
+			AND equipment_name = #{equipmentName}
+		</if>
+		<if test="equipmentGroup != null">
+			AND equipment_group = #{equipmentGroup}
+		</if>
+		<if test="state != null">
+			AND state = #{state}
+		</if>
+		<if test="adduserid != null">
+			AND adduserid = #{adduserid}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+		<if test="updateuserid != null">
+			AND updateuserid = #{updateuserid}
+		</if>
+		<if test="updatetime != null">
+			AND updatetime = #{updatetime}
+		</if>
+		<if test="lastCollectTime != null">
+			AND last_collect_time = #{lastCollectTime}
+		</if>
+		<if test="equipmentSoftVersion != null and equipmentSoftVersion != ''">
+			AND equipment_soft_version = #{equipmentSoftVersion}
+		</if>
+		<if
+			test="equipmentHardwareVersion != null and equipmentHardwareVersion != ''">
+			AND equipment_hardware_version = #{equipmentHardwareVersion}
+		</if>
+	</sql>
+
+	<!-- query list with page -->
+	<select id="selectEquipmentListByPageCond" resultMap="equipmentMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT WHERE 1=1
+		<include refid="where-all-page-condition" />
+		LIMIT
+		#{beginCount},#{pageRows}
+	</select>
+
+	<!-- query list count -->
+	<select id="selectEquipmentListTotalCount" resultType="int">
+		SELECT COUNT(id)
+		FROM T_EQUIPMENT
+		WHERE 1=1
+		<include refid="where-all-page-condition" />
+	</select>
+
+	<!-- query list without page -->
+	<select id="selectEquipmentListByCond" resultMap="equipmentMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT WHERE 1=1
+		<include refid="where-all-condition" />
+	</select>
+
+	<!-- query record -->
+	<select id="selectEquipmentByCond" resultMap="equipmentMapResult">
+		SELECT
+		<include refid="select-all-column" />
+		FROM T_EQUIPMENT WHERE 1=1
+		<include refid="where-all-condition" />
+		LIMIT 1
+	</select>
+
+</mapper>

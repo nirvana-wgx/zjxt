@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.dao.EquipmenprogramEdt">
+
+	<sql id="where-all-condition">
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="equipmentSoftVersion != null and equipmentSoftVersion != ''">
+			AND equipment_soft_version = #{equipmentSoftVersion}
+		</if>
+		<if
+			test="equipmentHardwareVersion != null and equipmentHardwareVersion != ''">
+			AND equipment_hardware_version = #{equipmentHardwareVersion}
+		</if>
+		<if test="equipmentProgramName != null and equipmentProgramName != ''">
+			AND equipment_program_name = #{equipmentProgramName}
+		</if>
+		<if test="equipmentProgramContent != null">
+			AND equipment_program_content = #{equipmentProgramContent}
+		</if>
+		<if test="state != null">
+			AND state = #{state}
+		</if>
+		<if test="adduserid != null">
+			AND adduserid = #{adduserid}
+		</if>
+		<if test="addtime != null">
+			AND addtime = #{addtime}
+		</if>
+	</sql>
+
+	<!-- insert record -->
+	<insert id="insertEquipmenprogram" parameterType="com.ctevs.po.EquipmenprogramEntity">
+		<selectKey resultType="java.math.BigInteger" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO T_EQUIPMENT_PROGRAM (
+		id,
+		equipment_soft_version,
+		equipment_hardware_version,
+		equipment_program_name,
+		equipment_program_content,
+		state,
+		adduserid,
+		addtime
+		) VALUES (
+		#{id} ,
+		#{equipmentSoftVersion} ,
+		#{equipmentHardwareVersion} ,
+		#{equipmentProgramName} ,
+		#{equipmentProgramContent} ,
+		#{state} ,
+		#{adduserid} ,
+		#{addtime}
+		)
+	</insert>
+
+	<!-- update record -->
+	<update id="updateEquipmenprogramByPrimaryKey" parameterType="com.ctevs.po.EquipmenprogramEntity">
+		UPDATE T_EQUIPMENT_PROGRAM
+		<set>
+			<if test="equipmentSoftVersion != null">
+				equipment_soft_version = #{equipmentSoftVersion} ,
+			</if>
+			<if test="equipmentHardwareVersion != null">
+				equipment_hardware_version = #{equipmentHardwareVersion} ,
+			</if>
+			<if test="equipmentProgramName != null">
+				equipment_program_name = #{equipmentProgramName} ,
+			</if>
+			<if test="equipmentProgramContent != null">
+				equipment_program_content = #{equipmentProgramContent} ,
+			</if>
+			<if test="state != null">
+				state = #{state} ,
+			</if>
+			<if test="adduserid != null">
+				adduserid = #{adduserid} ,
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime}
+			</if>
+		</set>
+		WHERE id = #{id}
+
+	</update>
+
+
+	<!-- delete record -->
+	<delete id="deleteEquipmenprogram" parameterType="com.ctevs.po.EquipmenprogramEntity">
+		DELETE FROM T_EQUIPMENT_PROGRAM
+		WHERE 1=1
+		<include refid="where-all-condition" />
+	</delete>
+
+	<!-- delete record -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger">
+		DELETE FROM
+		T_EQUIPMENT_PROGRAM
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

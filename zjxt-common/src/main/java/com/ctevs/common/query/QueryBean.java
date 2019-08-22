@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.ctevs.common.beans.Vo;
 /**
  * 原子服务基类
  *
@@ -12,7 +14,15 @@ import org.apache.commons.lang.StringUtils;
  * @version 1.0
  * @since JDK 1.7
  */
-public class QueryBean implements java.io.Serializable{
+/**
+ * 原子服务基类
+ *
+ * @author haibing.xiao
+ * @date: 2016年7月16日 上午9:54:09
+ * @version 1.0
+ * @since JDK 1.7
+ */
+public class QueryBean   extends Vo{
     private static final long serialVersionUID = -5016968481992128023L;
     private Map<String, Object> f = new LinkedHashMap<String, Object>();
     private int pageNo = 1;

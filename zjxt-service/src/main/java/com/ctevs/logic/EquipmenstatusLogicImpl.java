@@ -7,20 +7,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sea.dao.EquipmenstatusEdt;
-import com.sea.dao.EquipmenstatusSer;
-import com.sea.framework.constants.Constants;
-import com.sea.framework.exception.LogicException;
-import com.sea.framework.logic.BaseLogic;
-import com.sea.framework.message.MessageManager;
-import com.sea.framework.query.QueryBean;
-import com.sea.framework.result.ResultBean;
-import com.sea.framework.result.ResultPOBean;
-import com.sea.framework.result.ResultPOListBean;
-import com.sea.framework.util.BeanUtil;
-import com.sea.framework.util.MessageCode;
-import com.sea.model.EquipmenstatusEntity;
-import com.sea.model.EquipmenstatusPo;
+import com.ctevs.common.BeanUtil;
+import com.ctevs.common.Constants;
+import com.ctevs.common.exception.LogicException;
+import com.ctevs.common.message.MessageManager;
+import com.ctevs.common.query.QueryBean;
+import com.ctevs.common.result.ResultBean;
+import com.ctevs.common.result.ResultPOBean;
+import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.dao.EquipmenstatusEdt;
+import com.ctevs.dao.EquipmenstatusSer;
+import com.ctevs.po.EquipmenstatusEntity;
+import com.ctevs.vo.EquipmenstatusVo;
 
 /**
  * Equipmenstatus Logic Implement
@@ -28,7 +26,7 @@ import com.sea.model.EquipmenstatusPo;
  * @author system
  */
 @Service
-public class EquipmenstatusLogicImpl extends BaseLogic implements EquipmenstatusLogic {
+public class EquipmenstatusLogicImpl   implements EquipmenstatusLogic {
 
     @Autowired
     private EquipmenstatusSer equipmenstatusSer;
@@ -42,61 +40,61 @@ public class EquipmenstatusLogicImpl extends BaseLogic implements Equipmenstatus
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenstatusPo> queryEquipmenstatusListByPageCond(QueryBean queryBean) throws LogicException {
-        ResultPOListBean<EquipmenstatusPo> resultPOListBean = new ResultPOListBean<EquipmenstatusPo>();
-        List<EquipmenstatusPo> equipmenstatusPos = new ArrayList<EquipmenstatusPo>();
+    public ResultPOListBean<EquipmenstatusVo> queryEquipmenstatusListByPageCond(QueryBean queryBean) throws LogicException {
+        ResultPOListBean<EquipmenstatusVo> resultPOListBean = new ResultPOListBean<EquipmenstatusVo>();
+        List<EquipmenstatusVo> EquipmenstatusVos = new ArrayList<EquipmenstatusVo>();
         // page query
         int count = equipmenstatusSer.selectEquipmenstatusListTotalCount(queryBean);
         if (count > 0) {
             // total count
             queryBean.resetTotalCount(count);
             List<EquipmenstatusEntity> equipmenstatuss = equipmenstatusSer.selectEquipmenstatusListByPageCond(queryBean);
-            EquipmenstatusPo equipmenstatusPo = null;
+            EquipmenstatusVo EquipmenstatusVo = null;
             for (EquipmenstatusEntity equipmenstatus : equipmenstatuss) {
-                equipmenstatusPo = new EquipmenstatusPo();
-                BeanUtil.copyProperties(equipmenstatus, equipmenstatusPo);
-                equipmenstatusPos.add(equipmenstatusPo);
+                EquipmenstatusVo = new EquipmenstatusVo();
+                BeanUtil.copyProperties(equipmenstatus, EquipmenstatusVo);
+                EquipmenstatusVos.add(EquipmenstatusVo);
             }
         }
-        resultPOListBean.success(equipmenstatusPos, count);
+        resultPOListBean.success(EquipmenstatusVos, count);
         return resultPOListBean;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenstatusPo> queryEquipmenstatusListByCond(EquipmenstatusPo equipmenstatusPo)
+    public ResultPOListBean<EquipmenstatusVo> queryEquipmenstatusListByCond(EquipmenstatusVo EquipmenstatusVo)
             throws LogicException {
         // return object
-        ResultPOListBean<EquipmenstatusPo> result = new ResultPOListBean<EquipmenstatusPo>();
+        ResultPOListBean<EquipmenstatusVo> result = new ResultPOListBean<EquipmenstatusVo>();
         // po list
-        List<EquipmenstatusPo> equipmenstatusPos = new ArrayList<EquipmenstatusPo>();
+        List<EquipmenstatusVo> EquipmenstatusVos = new ArrayList<EquipmenstatusVo>();
         // excute query
-        List<EquipmenstatusEntity> equipmenstatuss = equipmenstatusSer.selectEquipmenstatusListByCond(equipmenstatusPo);
-        EquipmenstatusPo resultPo = null;
+        List<EquipmenstatusEntity> equipmenstatuss = equipmenstatusSer.selectEquipmenstatusListByCond(EquipmenstatusVo);
+        EquipmenstatusVo resultPo = null;
         // poList
         for (EquipmenstatusEntity equipmenstatus : equipmenstatuss) {
-            resultPo = new EquipmenstatusPo();
+            resultPo = new EquipmenstatusVo();
             BeanUtil.copyProperties(equipmenstatus, resultPo);
-            equipmenstatusPos.add(resultPo);
+            EquipmenstatusVos.add(resultPo);
         }
         // return success
-        result.success(equipmenstatusPos, equipmenstatusPos.size());
+        result.success(EquipmenstatusVos, EquipmenstatusVos.size());
         return result;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenstatusPo> queryEquipmenstatusById(BigInteger id) throws LogicException {
+    public ResultPOBean<EquipmenstatusVo> queryEquipmenstatusById(BigInteger id) throws LogicException {
         // return object
-        ResultPOBean<EquipmenstatusPo> result = new ResultPOBean<EquipmenstatusPo>();
-        EquipmenstatusPo po = null;
-        EquipmenstatusPo queryPo = new EquipmenstatusPo();
+        ResultPOBean<EquipmenstatusVo> result = new ResultPOBean<EquipmenstatusVo>();
+        EquipmenstatusVo po = null;
+        EquipmenstatusVo queryPo = new EquipmenstatusVo();
         queryPo.setId(id);
         EquipmenstatusEntity entity = equipmenstatusSer.selectEquipmenstatusByCond(queryPo);
         if (null != entity) {
-            po = new EquipmenstatusPo();
+            po = new EquipmenstatusVo();
             BeanUtil.copyProperties(entity, po);
             // return success
             result.setValue(po);
@@ -108,11 +106,11 @@ public class EquipmenstatusLogicImpl extends BaseLogic implements Equipmenstatus
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenstatusByPo(EquipmenstatusPo equipmenstatusPo) throws LogicException {
+    public ResultBean modifyEquipmenstatusByPo(EquipmenstatusVo EquipmenstatusVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenstatusEntity equipmenstatus = new EquipmenstatusEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenstatusPo, equipmenstatus);
+        BeanUtil.copyProperties(EquipmenstatusVo, equipmenstatus);
         this.equipmenstatusEdt.updateEquipmenstatusByPrimaryKey(equipmenstatus);
         resultBean.success();
         return resultBean;
@@ -121,11 +119,11 @@ public class EquipmenstatusLogicImpl extends BaseLogic implements Equipmenstatus
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenstatus(EquipmenstatusPo equipmenstatusPo) throws LogicException {
+    public ResultBean addEquipmenstatus(EquipmenstatusVo EquipmenstatusVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenstatusEntity equipmenstatus = new EquipmenstatusEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenstatusPo, equipmenstatus);
+        BeanUtil.copyProperties(EquipmenstatusVo, equipmenstatus);
         int status = this.equipmenstatusEdt.insertEquipmenstatus(equipmenstatus);
         if (status != Constants.ZERO) {
             resultBean.success();
@@ -151,12 +149,12 @@ public class EquipmenstatusLogicImpl extends BaseLogic implements Equipmenstatus
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenstatus(EquipmenstatusPo equipmenstatusPo) throws LogicException {
+    public ResultBean removeEquipmenstatus(EquipmenstatusVo EquipmenstatusVo) throws LogicException {
         // return object
         ResultBean result = new ResultBean();
         EquipmenstatusEntity equipmenstatus = new EquipmenstatusEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenstatusPo, equipmenstatus);
+        BeanUtil.copyProperties(EquipmenstatusVo, equipmenstatus);
         // excute delete
         this.equipmenstatusEdt.deleteEquipmenstatus(equipmenstatus);
         result.success();

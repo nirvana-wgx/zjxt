@@ -7,20 +7,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sea.dao.EquipmenlimitEdt;
-import com.sea.dao.EquipmenlimitSer;
-import com.sea.framework.constants.Constants;
-import com.sea.framework.exception.LogicException;
-import com.sea.framework.logic.BaseLogic;
-import com.sea.framework.message.MessageManager;
-import com.sea.framework.query.QueryBean;
-import com.sea.framework.result.ResultBean;
-import com.sea.framework.result.ResultPOBean;
-import com.sea.framework.result.ResultPOListBean;
-import com.sea.framework.util.BeanUtil;
-import com.sea.framework.util.MessageCode;
-import com.sea.model.EquipmenlimitEntity;
-import com.sea.model.EquipmenlimitPo;
+import com.ctevs.common.BeanUtil;
+import com.ctevs.common.Constants;
+import com.ctevs.common.exception.LogicException;
+import com.ctevs.common.message.MessageManager;
+import com.ctevs.common.query.QueryBean;
+import com.ctevs.common.result.ResultBean;
+import com.ctevs.common.result.ResultPOBean;
+import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.dao.EquipmenlimitEdt;
+import com.ctevs.dao.EquipmenlimitSer;
+import com.ctevs.po.EquipmenlimitEntity;
+import com.ctevs.vo.EquipmenlimitVo;
 
 /**
  * Equipmenlimit Logic Implement
@@ -28,7 +26,7 @@ import com.sea.model.EquipmenlimitPo;
  * @author system
  */
 @Service
-public class EquipmenlimitLogicImpl extends BaseLogic implements EquipmenlimitLogic {
+public class EquipmenlimitLogicImpl   implements EquipmenlimitLogic {
 
     @Autowired
     private EquipmenlimitSer equipmenlimitSer;
@@ -42,60 +40,60 @@ public class EquipmenlimitLogicImpl extends BaseLogic implements EquipmenlimitLo
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenlimitPo> queryEquipmenlimitListByPageCond(QueryBean queryBean) throws LogicException {
-        ResultPOListBean<EquipmenlimitPo> resultPOListBean = new ResultPOListBean<EquipmenlimitPo>();
-        List<EquipmenlimitPo> equipmenlimitPos = new ArrayList<EquipmenlimitPo>();
+    public ResultPOListBean<EquipmenlimitVo> queryEquipmenlimitListByPageCond(QueryBean queryBean) throws LogicException {
+        ResultPOListBean<EquipmenlimitVo> resultPOListBean = new ResultPOListBean<EquipmenlimitVo>();
+        List<EquipmenlimitVo> EquipmenlimitVos = new ArrayList<EquipmenlimitVo>();
         // page query
         int count = equipmenlimitSer.selectEquipmenlimitListTotalCount(queryBean);
         if (count > 0) {
             // total count
             queryBean.resetTotalCount(count);
             List<EquipmenlimitEntity> equipmenlimits = equipmenlimitSer.selectEquipmenlimitListByPageCond(queryBean);
-            EquipmenlimitPo equipmenlimitPo = null;
+            EquipmenlimitVo EquipmenlimitVo = null;
             for (EquipmenlimitEntity equipmenlimit : equipmenlimits) {
-                equipmenlimitPo = new EquipmenlimitPo();
-                BeanUtil.copyProperties(equipmenlimit, equipmenlimitPo);
-                equipmenlimitPos.add(equipmenlimitPo);
+                EquipmenlimitVo = new EquipmenlimitVo();
+                BeanUtil.copyProperties(equipmenlimit, EquipmenlimitVo);
+                EquipmenlimitVos.add(EquipmenlimitVo);
             }
         }
-        resultPOListBean.success(equipmenlimitPos, count);
+        resultPOListBean.success(EquipmenlimitVos, count);
         return resultPOListBean;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenlimitPo> queryEquipmenlimitListByCond(EquipmenlimitPo equipmenlimitPo) throws LogicException {
+    public ResultPOListBean<EquipmenlimitVo> queryEquipmenlimitListByCond(EquipmenlimitVo EquipmenlimitVo) throws LogicException {
         // return object
-        ResultPOListBean<EquipmenlimitPo> result = new ResultPOListBean<EquipmenlimitPo>();
+        ResultPOListBean<EquipmenlimitVo> result = new ResultPOListBean<EquipmenlimitVo>();
         // po list
-        List<EquipmenlimitPo> equipmenlimitPos = new ArrayList<EquipmenlimitPo>();
+        List<EquipmenlimitVo> EquipmenlimitVos = new ArrayList<EquipmenlimitVo>();
         // excute query
-        List<EquipmenlimitEntity> equipmenlimits = equipmenlimitSer.selectEquipmenlimitListByCond(equipmenlimitPo);
-        EquipmenlimitPo resultPo = null;
+        List<EquipmenlimitEntity> equipmenlimits = equipmenlimitSer.selectEquipmenlimitListByCond(EquipmenlimitVo);
+        EquipmenlimitVo resultPo = null;
         // poList
         for (EquipmenlimitEntity equipmenlimit : equipmenlimits) {
-            resultPo = new EquipmenlimitPo();
+            resultPo = new EquipmenlimitVo();
             BeanUtil.copyProperties(equipmenlimit, resultPo);
-            equipmenlimitPos.add(resultPo);
+            EquipmenlimitVos.add(resultPo);
         }
         // return success
-        result.success(equipmenlimitPos, equipmenlimitPos.size());
+        result.success(EquipmenlimitVos, EquipmenlimitVos.size());
         return result;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenlimitPo> queryEquipmenlimitById(BigInteger id) throws LogicException {
+    public ResultPOBean<EquipmenlimitVo> queryEquipmenlimitById(BigInteger id) throws LogicException {
         // return object
-        ResultPOBean<EquipmenlimitPo> result = new ResultPOBean<EquipmenlimitPo>();
-        EquipmenlimitPo po = null;
-        EquipmenlimitPo queryPo = new EquipmenlimitPo();
+        ResultPOBean<EquipmenlimitVo> result = new ResultPOBean<EquipmenlimitVo>();
+        EquipmenlimitVo po = null;
+        EquipmenlimitVo queryPo = new EquipmenlimitVo();
         queryPo.setId(id);
         EquipmenlimitEntity entity = equipmenlimitSer.selectEquipmenlimitByCond(queryPo);
         if (null != entity) {
-            po = new EquipmenlimitPo();
+            po = new EquipmenlimitVo();
             BeanUtil.copyProperties(entity, po);
             // return success
             result.setValue(po);
@@ -107,11 +105,11 @@ public class EquipmenlimitLogicImpl extends BaseLogic implements EquipmenlimitLo
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenlimitByPo(EquipmenlimitPo equipmenlimitPo) throws LogicException {
+    public ResultBean modifyEquipmenlimitByPo(EquipmenlimitVo EquipmenlimitVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenlimitEntity equipmenlimit = new EquipmenlimitEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenlimitPo, equipmenlimit);
+        BeanUtil.copyProperties(EquipmenlimitVo, equipmenlimit);
         this.equipmenlimitEdt.updateEquipmenlimitByPrimaryKey(equipmenlimit);
         resultBean.success();
         return resultBean;
@@ -120,11 +118,11 @@ public class EquipmenlimitLogicImpl extends BaseLogic implements EquipmenlimitLo
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenlimit(EquipmenlimitPo equipmenlimitPo) throws LogicException {
+    public ResultBean addEquipmenlimit(EquipmenlimitVo EquipmenlimitVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenlimitEntity equipmenlimit = new EquipmenlimitEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenlimitPo, equipmenlimit);
+        BeanUtil.copyProperties(EquipmenlimitVo, equipmenlimit);
         int status = this.equipmenlimitEdt.insertEquipmenlimit(equipmenlimit);
         if (status != Constants.ZERO) {
             resultBean.success();
@@ -150,12 +148,12 @@ public class EquipmenlimitLogicImpl extends BaseLogic implements EquipmenlimitLo
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenlimit(EquipmenlimitPo equipmenlimitPo) throws LogicException {
+    public ResultBean removeEquipmenlimit(EquipmenlimitVo EquipmenlimitVo) throws LogicException {
         // return object
         ResultBean result = new ResultBean();
         EquipmenlimitEntity equipmenlimit = new EquipmenlimitEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenlimitPo, equipmenlimit);
+        BeanUtil.copyProperties(EquipmenlimitVo, equipmenlimit);
         // excute delete
         this.equipmenlimitEdt.deleteEquipmenlimit(equipmenlimit);
         result.success();

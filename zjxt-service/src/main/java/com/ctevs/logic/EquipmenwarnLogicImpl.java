@@ -7,20 +7,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sea.dao.EquipmenwarnEdt;
-import com.sea.dao.EquipmenwarnSer;
-import com.sea.framework.constants.Constants;
-import com.sea.framework.exception.LogicException;
-import com.sea.framework.logic.BaseLogic;
-import com.sea.framework.message.MessageManager;
-import com.sea.framework.query.QueryBean;
-import com.sea.framework.result.ResultBean;
-import com.sea.framework.result.ResultPOBean;
-import com.sea.framework.result.ResultPOListBean;
-import com.sea.framework.util.BeanUtil;
-import com.sea.framework.util.MessageCode;
-import com.sea.model.EquipmenwarnEntity;
-import com.sea.model.EquipmenwarnPo;
+import com.ctevs.common.BeanUtil;
+import com.ctevs.common.Constants;
+import com.ctevs.common.exception.LogicException;
+import com.ctevs.common.message.MessageManager;
+import com.ctevs.common.query.QueryBean;
+import com.ctevs.common.result.ResultBean;
+import com.ctevs.common.result.ResultPOBean;
+import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.dao.EquipmenwarnEdt;
+import com.ctevs.dao.EquipmenwarnSer;
+import com.ctevs.po.EquipmenwarnEntity;
+import com.ctevs.vo.EquipmenwarnVo;
 
 /**
  * Equipmenwarn Logic Implement
@@ -28,7 +26,7 @@ import com.sea.model.EquipmenwarnPo;
  * @author system
  */
 @Service
-public class EquipmenwarnLogicImpl extends BaseLogic implements EquipmenwarnLogic {
+public class EquipmenwarnLogicImpl   implements EquipmenwarnLogic {
 
     @Autowired
     private EquipmenwarnSer equipmenwarnSer;
@@ -42,60 +40,60 @@ public class EquipmenwarnLogicImpl extends BaseLogic implements EquipmenwarnLogi
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenwarnPo> queryEquipmenwarnListByPageCond(QueryBean queryBean) throws LogicException {
-        ResultPOListBean<EquipmenwarnPo> resultPOListBean = new ResultPOListBean<EquipmenwarnPo>();
-        List<EquipmenwarnPo> equipmenwarnPos = new ArrayList<EquipmenwarnPo>();
+    public ResultPOListBean<EquipmenwarnVo> queryEquipmenwarnListByPageCond(QueryBean queryBean) throws LogicException {
+        ResultPOListBean<EquipmenwarnVo> resultPOListBean = new ResultPOListBean<EquipmenwarnVo>();
+        List<EquipmenwarnVo> EquipmenwarnVos = new ArrayList<EquipmenwarnVo>();
         // page query
         int count = equipmenwarnSer.selectEquipmenwarnListTotalCount(queryBean);
         if (count > 0) {
             // total count
             queryBean.resetTotalCount(count);
             List<EquipmenwarnEntity> equipmenwarns = equipmenwarnSer.selectEquipmenwarnListByPageCond(queryBean);
-            EquipmenwarnPo equipmenwarnPo = null;
+            EquipmenwarnVo EquipmenwarnVo = null;
             for (EquipmenwarnEntity equipmenwarn : equipmenwarns) {
-                equipmenwarnPo = new EquipmenwarnPo();
-                BeanUtil.copyProperties(equipmenwarn, equipmenwarnPo);
-                equipmenwarnPos.add(equipmenwarnPo);
+                EquipmenwarnVo = new EquipmenwarnVo();
+                BeanUtil.copyProperties(equipmenwarn, EquipmenwarnVo);
+                EquipmenwarnVos.add(EquipmenwarnVo);
             }
         }
-        resultPOListBean.success(equipmenwarnPos, count);
+        resultPOListBean.success(EquipmenwarnVos, count);
         return resultPOListBean;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenwarnPo> queryEquipmenwarnListByCond(EquipmenwarnPo equipmenwarnPo) throws LogicException {
+    public ResultPOListBean<EquipmenwarnVo> queryEquipmenwarnListByCond(EquipmenwarnVo EquipmenwarnVo) throws LogicException {
         // return object
-        ResultPOListBean<EquipmenwarnPo> result = new ResultPOListBean<EquipmenwarnPo>();
+        ResultPOListBean<EquipmenwarnVo> result = new ResultPOListBean<EquipmenwarnVo>();
         // po list
-        List<EquipmenwarnPo> equipmenwarnPos = new ArrayList<EquipmenwarnPo>();
+        List<EquipmenwarnVo> EquipmenwarnVos = new ArrayList<EquipmenwarnVo>();
         // excute query
-        List<EquipmenwarnEntity> equipmenwarns = equipmenwarnSer.selectEquipmenwarnListByCond(equipmenwarnPo);
-        EquipmenwarnPo resultPo = null;
+        List<EquipmenwarnEntity> equipmenwarns = equipmenwarnSer.selectEquipmenwarnListByCond(EquipmenwarnVo);
+        EquipmenwarnVo resultPo = null;
         // poList
         for (EquipmenwarnEntity equipmenwarn : equipmenwarns) {
-            resultPo = new EquipmenwarnPo();
+            resultPo = new EquipmenwarnVo();
             BeanUtil.copyProperties(equipmenwarn, resultPo);
-            equipmenwarnPos.add(resultPo);
+            EquipmenwarnVos.add(resultPo);
         }
         // return success
-        result.success(equipmenwarnPos, equipmenwarnPos.size());
+        result.success(EquipmenwarnVos, EquipmenwarnVos.size());
         return result;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenwarnPo> queryEquipmenwarnById(BigInteger id) throws LogicException {
+    public ResultPOBean<EquipmenwarnVo> queryEquipmenwarnById(BigInteger id) throws LogicException {
         // return object
-        ResultPOBean<EquipmenwarnPo> result = new ResultPOBean<EquipmenwarnPo>();
-        EquipmenwarnPo po = null;
-        EquipmenwarnPo queryPo = new EquipmenwarnPo();
+        ResultPOBean<EquipmenwarnVo> result = new ResultPOBean<EquipmenwarnVo>();
+        EquipmenwarnVo po = null;
+        EquipmenwarnVo queryPo = new EquipmenwarnVo();
         queryPo.setId(id);
         EquipmenwarnEntity entity = equipmenwarnSer.selectEquipmenwarnByCond(queryPo);
         if (null != entity) {
-            po = new EquipmenwarnPo();
+            po = new EquipmenwarnVo();
             BeanUtil.copyProperties(entity, po);
             // return success
             result.setValue(po);
@@ -107,11 +105,11 @@ public class EquipmenwarnLogicImpl extends BaseLogic implements EquipmenwarnLogi
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenwarnByPo(EquipmenwarnPo equipmenwarnPo) throws LogicException {
+    public ResultBean modifyEquipmenwarnByPo(EquipmenwarnVo EquipmenwarnVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenwarnEntity equipmenwarn = new EquipmenwarnEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenwarnPo, equipmenwarn);
+        BeanUtil.copyProperties(EquipmenwarnVo, equipmenwarn);
         this.equipmenwarnEdt.updateEquipmenwarnByPrimaryKey(equipmenwarn);
         resultBean.success();
         return resultBean;
@@ -120,11 +118,11 @@ public class EquipmenwarnLogicImpl extends BaseLogic implements EquipmenwarnLogi
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenwarn(EquipmenwarnPo equipmenwarnPo) throws LogicException {
+    public ResultBean addEquipmenwarn(EquipmenwarnVo EquipmenwarnVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenwarnEntity equipmenwarn = new EquipmenwarnEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenwarnPo, equipmenwarn);
+        BeanUtil.copyProperties(EquipmenwarnVo, equipmenwarn);
         int status = this.equipmenwarnEdt.insertEquipmenwarn(equipmenwarn);
         if (status != Constants.ZERO) {
             resultBean.success();
@@ -150,12 +148,12 @@ public class EquipmenwarnLogicImpl extends BaseLogic implements EquipmenwarnLogi
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenwarn(EquipmenwarnPo equipmenwarnPo) throws LogicException {
+    public ResultBean removeEquipmenwarn(EquipmenwarnVo EquipmenwarnVo) throws LogicException {
         // return object
         ResultBean result = new ResultBean();
         EquipmenwarnEntity equipmenwarn = new EquipmenwarnEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenwarnPo, equipmenwarn);
+        BeanUtil.copyProperties(EquipmenwarnVo, equipmenwarn);
         // excute delete
         this.equipmenwarnEdt.deleteEquipmenwarn(equipmenwarn);
         result.success();

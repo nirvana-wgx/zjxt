@@ -7,20 +7,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sea.dao.EquipmenbatteryProbeEdt;
-import com.sea.dao.EquipmenbatteryProbeSer;
-import com.sea.framework.constants.Constants;
-import com.sea.framework.exception.LogicException;
-import com.sea.framework.logic.BaseLogic;
-import com.sea.framework.message.MessageManager;
-import com.sea.framework.query.QueryBean;
-import com.sea.framework.result.ResultBean;
-import com.sea.framework.result.ResultPOBean;
-import com.sea.framework.result.ResultPOListBean;
-import com.sea.framework.util.BeanUtil;
-import com.sea.framework.util.MessageCode;
-import com.sea.model.EquipmenbatteryProbeEntity;
-import com.sea.model.EquipmenbatteryProbePo;
+import com.ctevs.common.BeanUtil;
+import com.ctevs.common.Constants;
+import com.ctevs.common.exception.LogicException;
+import com.ctevs.common.message.MessageManager;
+import com.ctevs.common.query.QueryBean;
+import com.ctevs.common.result.ResultBean;
+import com.ctevs.common.result.ResultPOBean;
+import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.dao.EquipmenbatteryProbeEdt;
+import com.ctevs.dao.EquipmenbatteryProbeSer;
+import com.ctevs.po.EquipmenbatteryProbeEntity;
+import com.ctevs.vo.EquipmenbatteryProbeVo;
 
 /**
  * EquipmenbatteryProbe Logic Implement
@@ -42,10 +40,10 @@ public class EquipmenbatteryProbeLogicImpl   implements EquipmenbatteryProbeLogi
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenbatteryProbePo> queryEquipmenbatteryProbeListByPageCond(QueryBean queryBean)
+    public ResultPOListBean<EquipmenbatteryProbeVo> queryEquipmenbatteryProbeListByPageCond(QueryBean queryBean)
             throws LogicException {
-        ResultPOListBean<EquipmenbatteryProbePo> resultPOListBean = new ResultPOListBean<EquipmenbatteryProbePo>();
-        List<EquipmenbatteryProbePo> equipmenbatteryProbePos = new ArrayList<EquipmenbatteryProbePo>();
+        ResultPOListBean<EquipmenbatteryProbeVo> resultPOListBean = new ResultPOListBean<EquipmenbatteryProbeVo>();
+        List<EquipmenbatteryProbeVo> EquipmenbatteryProbeVos = new ArrayList<EquipmenbatteryProbeVo>();
         // page query
         int count = equipmenbatteryProbeSer.selectEquipmenbatteryProbeListTotalCount(queryBean);
         if (count > 0) {
@@ -53,53 +51,53 @@ public class EquipmenbatteryProbeLogicImpl   implements EquipmenbatteryProbeLogi
             queryBean.resetTotalCount(count);
             List<EquipmenbatteryProbeEntity> equipmenbatteryProbes = equipmenbatteryProbeSer
                     .selectEquipmenbatteryProbeListByPageCond(queryBean);
-            EquipmenbatteryProbePo equipmenbatteryProbePo = null;
+            EquipmenbatteryProbeVo EquipmenbatteryProbeVo = null;
             for (EquipmenbatteryProbeEntity equipmenbatteryProbe : equipmenbatteryProbes) {
-                equipmenbatteryProbePo = new EquipmenbatteryProbePo();
-                BeanUtil.copyProperties(equipmenbatteryProbe, equipmenbatteryProbePo);
-                equipmenbatteryProbePos.add(equipmenbatteryProbePo);
+                EquipmenbatteryProbeVo = new EquipmenbatteryProbeVo();
+                BeanUtil.copyProperties(equipmenbatteryProbe, EquipmenbatteryProbeVo);
+                EquipmenbatteryProbeVos.add(EquipmenbatteryProbeVo);
             }
         }
-        resultPOListBean.success(equipmenbatteryProbePos, count);
+        resultPOListBean.success(EquipmenbatteryProbeVos, count);
         return resultPOListBean;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenbatteryProbePo> queryEquipmenbatteryProbeListByCond(
-            EquipmenbatteryProbePo equipmenbatteryProbePo) throws LogicException {
+    public ResultPOListBean<EquipmenbatteryProbeVo> queryEquipmenbatteryProbeListByCond(
+            EquipmenbatteryProbeVo EquipmenbatteryProbeVo) throws LogicException {
         // return object
-        ResultPOListBean<EquipmenbatteryProbePo> result = new ResultPOListBean<EquipmenbatteryProbePo>();
+        ResultPOListBean<EquipmenbatteryProbeVo> result = new ResultPOListBean<EquipmenbatteryProbeVo>();
         // po list
-        List<EquipmenbatteryProbePo> equipmenbatteryProbePos = new ArrayList<EquipmenbatteryProbePo>();
+        List<EquipmenbatteryProbeVo> EquipmenbatteryProbeVos = new ArrayList<EquipmenbatteryProbeVo>();
         // excute query
         List<EquipmenbatteryProbeEntity> equipmenbatteryProbes = equipmenbatteryProbeSer
-                .selectEquipmenbatteryProbeListByCond(equipmenbatteryProbePo);
-        EquipmenbatteryProbePo resultPo = null;
+                .selectEquipmenbatteryProbeListByCond(EquipmenbatteryProbeVo);
+        EquipmenbatteryProbeVo resultPo = null;
         // poList
         for (EquipmenbatteryProbeEntity equipmenbatteryProbe : equipmenbatteryProbes) {
-            resultPo = new EquipmenbatteryProbePo();
+            resultPo = new EquipmenbatteryProbeVo();
             BeanUtil.copyProperties(equipmenbatteryProbe, resultPo);
-            equipmenbatteryProbePos.add(resultPo);
+            EquipmenbatteryProbeVos.add(resultPo);
         }
         // return success
-        result.success(equipmenbatteryProbePos, equipmenbatteryProbePos.size());
+        result.success(EquipmenbatteryProbeVos, EquipmenbatteryProbeVos.size());
         return result;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenbatteryProbePo> queryEquipmenbatteryProbeById(BigInteger id) throws LogicException {
+    public ResultPOBean<EquipmenbatteryProbeVo> queryEquipmenbatteryProbeById(BigInteger id) throws LogicException {
         // return object
-        ResultPOBean<EquipmenbatteryProbePo> result = new ResultPOBean<EquipmenbatteryProbePo>();
-        EquipmenbatteryProbePo po = null;
-        EquipmenbatteryProbePo queryPo = new EquipmenbatteryProbePo();
+        ResultPOBean<EquipmenbatteryProbeVo> result = new ResultPOBean<EquipmenbatteryProbeVo>();
+        EquipmenbatteryProbeVo po = null;
+        EquipmenbatteryProbeVo queryPo = new EquipmenbatteryProbeVo();
         queryPo.setId(id);
         EquipmenbatteryProbeEntity entity = equipmenbatteryProbeSer.selectEquipmenbatteryProbeByCond(queryPo);
         if (null != entity) {
-            po = new EquipmenbatteryProbePo();
+            po = new EquipmenbatteryProbeVo();
             BeanUtil.copyProperties(entity, po);
             // return success
             result.setValue(po);
@@ -111,11 +109,11 @@ public class EquipmenbatteryProbeLogicImpl   implements EquipmenbatteryProbeLogi
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenbatteryProbeByPo(EquipmenbatteryProbePo equipmenbatteryProbePo) throws LogicException {
+    public ResultBean modifyEquipmenbatteryProbeByPo(EquipmenbatteryProbeVo EquipmenbatteryProbeVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenbatteryProbeEntity equipmenbatteryProbe = new EquipmenbatteryProbeEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenbatteryProbePo, equipmenbatteryProbe);
+        BeanUtil.copyProperties(EquipmenbatteryProbeVo, equipmenbatteryProbe);
         this.equipmenbatteryProbeEdt.updateEquipmenbatteryProbeByPrimaryKey(equipmenbatteryProbe);
         resultBean.success();
         return resultBean;
@@ -124,11 +122,11 @@ public class EquipmenbatteryProbeLogicImpl   implements EquipmenbatteryProbeLogi
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenbatteryProbe(EquipmenbatteryProbePo equipmenbatteryProbePo) throws LogicException {
+    public ResultBean addEquipmenbatteryProbe(EquipmenbatteryProbeVo EquipmenbatteryProbeVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmenbatteryProbeEntity equipmenbatteryProbe = new EquipmenbatteryProbeEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenbatteryProbePo, equipmenbatteryProbe);
+        BeanUtil.copyProperties(EquipmenbatteryProbeVo, equipmenbatteryProbe);
         int status = this.equipmenbatteryProbeEdt.insertEquipmenbatteryProbe(equipmenbatteryProbe);
         if (status != Constants.ZERO) {
             resultBean.success();
@@ -154,12 +152,12 @@ public class EquipmenbatteryProbeLogicImpl   implements EquipmenbatteryProbeLogi
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenbatteryProbe(EquipmenbatteryProbePo equipmenbatteryProbePo) throws LogicException {
+    public ResultBean removeEquipmenbatteryProbe(EquipmenbatteryProbeVo EquipmenbatteryProbeVo) throws LogicException {
         // return object
         ResultBean result = new ResultBean();
         EquipmenbatteryProbeEntity equipmenbatteryProbe = new EquipmenbatteryProbeEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmenbatteryProbePo, equipmenbatteryProbe);
+        BeanUtil.copyProperties(EquipmenbatteryProbeVo, equipmenbatteryProbe);
         // excute delete
         this.equipmenbatteryProbeEdt.deleteEquipmenbatteryProbe(equipmenbatteryProbe);
         result.success();

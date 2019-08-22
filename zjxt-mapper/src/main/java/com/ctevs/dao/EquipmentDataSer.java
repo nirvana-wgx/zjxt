@@ -2,7 +2,7 @@ package com.ctevs.dao;
 
 import java.util.List;
 
-import com.ctevs.page.QueryBean;
+import com.ctevs.common.query.QueryBean;
 import com.ctevs.po.EquipmenbatteryEntity;
 import com.ctevs.po.EquipmentDataEntity;
 import com.ctevs.vo.EquipmenbatteryVo;

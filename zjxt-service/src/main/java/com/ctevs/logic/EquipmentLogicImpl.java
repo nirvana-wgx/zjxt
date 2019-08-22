@@ -7,20 +7,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sea.dao.EquipmentEdt;
-import com.sea.dao.EquipmentSer;
-import com.sea.framework.constants.Constants;
-import com.sea.framework.exception.LogicException;
-import com.sea.framework.logic.BaseLogic;
-import com.sea.framework.message.MessageManager;
-import com.sea.framework.query.QueryBean;
-import com.sea.framework.result.ResultBean;
-import com.sea.framework.result.ResultPOBean;
-import com.sea.framework.result.ResultPOListBean;
-import com.sea.framework.util.BeanUtil;
-import com.sea.framework.util.MessageCode;
-import com.sea.model.EquipmentEntity;
-import com.sea.model.EquipmentPo;
+import com.ctevs.common.BeanUtil;
+import com.ctevs.common.Constants;
+import com.ctevs.common.exception.LogicException;
+import com.ctevs.common.message.MessageManager;
+import com.ctevs.common.query.QueryBean;
+import com.ctevs.common.result.ResultBean;
+import com.ctevs.common.result.ResultPOBean;
+import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.dao.EquipmentEdt;
+import com.ctevs.dao.EquipmentSer;
+import com.ctevs.po.EquipmentEntity;
+import com.ctevs.vo.EquipmentVo;
 
 /**
  * Equipment Logic Implement
@@ -28,7 +26,7 @@ import com.sea.model.EquipmentPo;
  * @author system
  */
 @Service
-public class EquipmentLogicImpl extends BaseLogic implements EquipmentLogic {
+public class EquipmentLogicImpl   implements EquipmentLogic {
 
     @Autowired
     private EquipmentSer equipmentSer;
@@ -42,60 +40,60 @@ public class EquipmentLogicImpl extends BaseLogic implements EquipmentLogic {
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmentPo> queryEquipmentListByPageCond(QueryBean queryBean) throws LogicException {
-        ResultPOListBean<EquipmentPo> resultPOListBean = new ResultPOListBean<EquipmentPo>();
-        List<EquipmentPo> equipmentPos = new ArrayList<EquipmentPo>();
+    public ResultPOListBean<EquipmentVo> queryEquipmentListByPageCond(QueryBean queryBean) throws LogicException {
+        ResultPOListBean<EquipmentVo> resultPOListBean = new ResultPOListBean<EquipmentVo>();
+        List<EquipmentVo> EquipmentVos = new ArrayList<EquipmentVo>();
         // page query
         int count = equipmentSer.selectEquipmentListTotalCount(queryBean);
         if (count > 0) {
             // total count
             queryBean.resetTotalCount(count);
             List<EquipmentEntity> equipments = equipmentSer.selectEquipmentListByPageCond(queryBean);
-            EquipmentPo equipmentPo = null;
+            EquipmentVo EquipmentVo = null;
             for (EquipmentEntity equipment : equipments) {
-                equipmentPo = new EquipmentPo();
-                BeanUtil.copyProperties(equipment, equipmentPo);
-                equipmentPos.add(equipmentPo);
+                EquipmentVo = new EquipmentVo();
+                BeanUtil.copyProperties(equipment, EquipmentVo);
+                EquipmentVos.add(EquipmentVo);
             }
         }
-        resultPOListBean.success(equipmentPos, count);
+        resultPOListBean.success(EquipmentVos, count);
         return resultPOListBean;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmentPo> queryEquipmentListByCond(EquipmentPo equipmentPo) throws LogicException {
+    public ResultPOListBean<EquipmentVo> queryEquipmentListByCond(EquipmentVo EquipmentVo) throws LogicException {
         // return object
-        ResultPOListBean<EquipmentPo> result = new ResultPOListBean<EquipmentPo>();
+        ResultPOListBean<EquipmentVo> result = new ResultPOListBean<EquipmentVo>();
         // po list
-        List<EquipmentPo> equipmentPos = new ArrayList<EquipmentPo>();
+        List<EquipmentVo> EquipmentVos = new ArrayList<EquipmentVo>();
         // excute query
-        List<EquipmentEntity> equipments = equipmentSer.selectEquipmentListByCond(equipmentPo);
-        EquipmentPo resultPo = null;
+        List<EquipmentEntity> equipments = equipmentSer.selectEquipmentListByCond(EquipmentVo);
+        EquipmentVo resultPo = null;
         // poList
         for (EquipmentEntity equipment : equipments) {
-            resultPo = new EquipmentPo();
+            resultPo = new EquipmentVo();
             BeanUtil.copyProperties(equipment, resultPo);
-            equipmentPos.add(resultPo);
+            EquipmentVos.add(resultPo);
         }
         // return success
-        result.success(equipmentPos, equipmentPos.size());
+        result.success(EquipmentVos, EquipmentVos.size());
         return result;
     }
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmentPo> queryEquipmentById(BigInteger id) throws LogicException {
+    public ResultPOBean<EquipmentVo> queryEquipmentById(BigInteger id) throws LogicException {
         // return object
-        ResultPOBean<EquipmentPo> result = new ResultPOBean<EquipmentPo>();
-        EquipmentPo po = null;
-        EquipmentPo queryPo = new EquipmentPo();
+        ResultPOBean<EquipmentVo> result = new ResultPOBean<EquipmentVo>();
+        EquipmentVo po = null;
+        EquipmentVo queryPo = new EquipmentVo();
         queryPo.setId(id);
         EquipmentEntity entity = equipmentSer.selectEquipmentByCond(queryPo);
         if (null != entity) {
-            po = new EquipmentPo();
+            po = new EquipmentVo();
             BeanUtil.copyProperties(entity, po);
             // return success
             result.setValue(po);
@@ -107,11 +105,11 @@ public class EquipmentLogicImpl extends BaseLogic implements EquipmentLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmentByPo(EquipmentPo equipmentPo) throws LogicException {
+    public ResultBean modifyEquipmentByPo(EquipmentVo EquipmentVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmentEntity equipment = new EquipmentEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmentPo, equipment);
+        BeanUtil.copyProperties(EquipmentVo, equipment);
         this.equipmentEdt.updateEquipmentByPrimaryKey(equipment);
         resultBean.success();
         return resultBean;
@@ -120,11 +118,11 @@ public class EquipmentLogicImpl extends BaseLogic implements EquipmentLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipment(EquipmentPo equipmentPo) throws LogicException {
+    public ResultBean addEquipment(EquipmentVo EquipmentVo) throws LogicException {
         ResultBean resultBean = new ResultBean();
         EquipmentEntity equipment = new EquipmentEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmentPo, equipment);
+        BeanUtil.copyProperties(EquipmentVo, equipment);
         int status = this.equipmentEdt.insertEquipment(equipment);
         if (status != Constants.ZERO) {
             resultBean.success();
@@ -150,12 +148,12 @@ public class EquipmentLogicImpl extends BaseLogic implements EquipmentLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipment(EquipmentPo equipmentPo) throws LogicException {
+    public ResultBean removeEquipment(EquipmentVo EquipmentVo) throws LogicException {
         // return object
         ResultBean result = new ResultBean();
         EquipmentEntity equipment = new EquipmentEntity();
         // po->entity
-        BeanUtil.copyProperties(equipmentPo, equipment);
+        BeanUtil.copyProperties(EquipmentVo, equipment);
         // excute delete
         this.equipmentEdt.deleteEquipment(equipment);
         result.success();

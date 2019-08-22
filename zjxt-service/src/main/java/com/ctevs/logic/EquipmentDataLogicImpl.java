@@ -6,17 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sea.dao.EquipmentDataSer;
-import com.sea.framework.exception.LogicException;
-import com.sea.framework.logic.BaseLogic;
-import com.sea.framework.message.MessageManager;
-import com.sea.framework.query.QueryBean;
-import com.sea.framework.result.ResultPOListBean;
-import com.sea.framework.util.BeanUtil;
-import com.sea.model.EquipmenbatteryEntity;
-import com.sea.model.EquipmenbatteryPo;
-import com.sea.model.EquipmentDataEntity;
-import com.sea.model.EquipmentDataPo;
+import com.ctevs.common.BeanUtil;
+import com.ctevs.common.exception.LogicException;
+import com.ctevs.common.message.MessageManager;
+import com.ctevs.common.query.QueryBean;
+import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.dao.EquipmentDataSer;
+import com.ctevs.po.EquipmenbatteryEntity;
+import com.ctevs.po.EquipmentDataEntity;
+import com.ctevs.vo.EquipmenbatteryVo;
+import com.ctevs.vo.EquipmentDataVo;
 
 /**
  * Equipment Logic Implement
@@ -24,7 +23,7 @@ import com.sea.model.EquipmentDataPo;
  * @author system
  */
 @Service
-public class EquipmentDataLogicImpl extends BaseLogic implements EquipmentDataLogic {
+public class EquipmentDataLogicImpl   implements EquipmentDataLogic {
 
     @Autowired
     private EquipmentDataSer equipmentDataSer;
@@ -37,18 +36,18 @@ public class EquipmentDataLogicImpl extends BaseLogic implements EquipmentDataLo
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmentDataPo> queryEquipmentDataListByPageCond(QueryBean queryBean) throws LogicException {
-        ResultPOListBean<EquipmentDataPo> resultPOListBean = new ResultPOListBean<EquipmentDataPo>();
-        List<EquipmentDataPo> equipmentPos = new ArrayList<EquipmentDataPo>();
+    public ResultPOListBean<EquipmentDataVo> queryEquipmentDataListByPageCond(QueryBean queryBean) throws LogicException {
+        ResultPOListBean<EquipmentDataVo> resultPOListBean = new ResultPOListBean<EquipmentDataVo>();
+        List<EquipmentDataVo> equipmentPos = new ArrayList<EquipmentDataVo>();
         // page query
         int count = equipmentDataSer.selectEquipmentDataListTotalCount(queryBean);
         if (count > 0) {
             // total count
             queryBean.resetTotalCount(count);
             List<EquipmentDataEntity> equipments = equipmentDataSer.selectEquipmentDataListByPageCond(queryBean);
-            EquipmentDataPo equipmentPo = null;
+            EquipmentDataVo equipmentPo = null;
             for (EquipmentDataEntity equipment : equipments) {
-                equipmentPo = new EquipmentDataPo();
+                equipmentPo = new EquipmentDataVo();
                 BeanUtil.copyProperties(equipment, equipmentPo);
                 equipmentPos.add(equipmentPo);
             }
@@ -58,18 +57,18 @@ public class EquipmentDataLogicImpl extends BaseLogic implements EquipmentDataLo
     }
 
     @Override
-    public ResultPOListBean<EquipmentDataPo> queryEquipmentDataNewListByPageCond(QueryBean queryBean) throws LogicException {
-        ResultPOListBean<EquipmentDataPo> resultPOListBean = new ResultPOListBean<EquipmentDataPo>();
-        List<EquipmentDataPo> equipmentPos = new ArrayList<EquipmentDataPo>();
+    public ResultPOListBean<EquipmentDataVo> queryEquipmentDataNewListByPageCond(QueryBean queryBean) throws LogicException {
+        ResultPOListBean<EquipmentDataVo> resultPOListBean = new ResultPOListBean<EquipmentDataVo>();
+        List<EquipmentDataVo> equipmentPos = new ArrayList<EquipmentDataVo>();
         // page query
         int count = equipmentDataSer.selectEquipmentDataNewListTotalCount(queryBean);
         if (count > 0) {
             // total count
             queryBean.resetTotalCount(count);
             List<EquipmentDataEntity> equipments = equipmentDataSer.selectEquipmentDataNewListByPageCond(queryBean);
-            EquipmentDataPo equipmentPo = null;
+            EquipmentDataVo equipmentPo = null;
             for (EquipmentDataEntity equipment : equipments) {
-                equipmentPo = new EquipmentDataPo();
+                equipmentPo = new EquipmentDataVo();
                 BeanUtil.copyProperties(equipment, equipmentPo);
                 equipmentPos.add(equipmentPo);
             }
@@ -78,22 +77,22 @@ public class EquipmentDataLogicImpl extends BaseLogic implements EquipmentDataLo
         return resultPOListBean;
     }
     @Override
-    public ResultPOListBean<EquipmenbatteryPo> selectEquipmentBatteryDataListByCond(EquipmenbatteryPo equipmenbatteryPo) throws LogicException{
+    public ResultPOListBean<EquipmenbatteryVo> selectEquipmentBatteryDataListByCond(EquipmenbatteryVo EquipmenbatteryVo) throws LogicException{
             // return object
-            ResultPOListBean<EquipmenbatteryPo> result = new ResultPOListBean<EquipmenbatteryPo>();
+            ResultPOListBean<EquipmenbatteryVo> result = new ResultPOListBean<EquipmenbatteryVo>();
             // po list
-            List<EquipmenbatteryPo> equipmenbatteryPos = new ArrayList<EquipmenbatteryPo>();
+            List<EquipmenbatteryVo> EquipmenbatteryVos = new ArrayList<EquipmenbatteryVo>();
             // excute query
-            List<EquipmenbatteryEntity> equipmenbatteryEntitys = equipmentDataSer.selectEquipmentBatteryDataListByCond(equipmenbatteryPo);
-            EquipmenbatteryPo resultPo = null;
+            List<EquipmenbatteryEntity> equipmenbatteryEntitys = equipmentDataSer.selectEquipmentBatteryDataListByCond(EquipmenbatteryVo);
+            EquipmenbatteryVo resultPo = null;
             // poList
             for (EquipmenbatteryEntity equipmenbatteryEntity : equipmenbatteryEntitys) {
-                resultPo = new EquipmenbatteryPo();
+                resultPo = new EquipmenbatteryVo();
                 BeanUtil.copyProperties(equipmenbatteryEntity, resultPo);
-                equipmenbatteryPos.add(resultPo);
+                EquipmenbatteryVos.add(resultPo);
             }
             // return success
-            result.success(equipmenbatteryPos, equipmenbatteryPos.size());
+            result.success(EquipmenbatteryVos, EquipmenbatteryVos.size());
             return result;
     }
 

@@ -1,7 +1,7 @@
 package com.ctevs.dao;
 import java.util.List;
 
-import com.ctevs.page.QueryBean;
+import com.ctevs.common.query.QueryBean;
 import com.ctevs.po.EquipmenprogramEntity;
 import com.ctevs.vo.EquipmenprogramVo;
 

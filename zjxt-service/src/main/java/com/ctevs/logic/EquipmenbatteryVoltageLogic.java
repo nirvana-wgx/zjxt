@@ -7,6 +7,7 @@ import com.ctevs.common.query.QueryBean;
 import com.ctevs.common.result.ResultBean;
 import com.ctevs.common.result.ResultPOBean;
 import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.vo.EquipmenbatteryVoltageVo;
 
 /**
  * EquipmenbatteryVoltage Logic
@@ -17,29 +18,29 @@ public interface EquipmenbatteryVoltageLogic {
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenbatteryVoltagePo> queryEquipmenbatteryVoltageListByPageCond(QueryBean queryBean)
+    public ResultPOListBean<EquipmenbatteryVoltageVo> queryEquipmenbatteryVoltageListByPageCond(QueryBean queryBean)
             throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenbatteryVoltagePo> queryEquipmenbatteryVoltageListByCond(
-            EquipmenbatteryVoltagePo equipmenbatteryVoltagePo) throws LogicException;
+    public ResultPOListBean<EquipmenbatteryVoltageVo> queryEquipmenbatteryVoltageListByCond(
+            EquipmenbatteryVoltageVo EquipmenbatteryVoltageVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenbatteryVoltagePo> queryEquipmenbatteryVoltageById(BigInteger id) throws LogicException;
+    public ResultPOBean<EquipmenbatteryVoltageVo> queryEquipmenbatteryVoltageById(BigInteger id) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenbatteryVoltageByPo(EquipmenbatteryVoltagePo equipmenbatteryVoltagePo) throws LogicException;
+    public ResultBean modifyEquipmenbatteryVoltageByPo(EquipmenbatteryVoltageVo EquipmenbatteryVoltageVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenbatteryVoltage(EquipmenbatteryVoltagePo equipmenbatteryVoltagePo) throws LogicException;
+    public ResultBean addEquipmenbatteryVoltage(EquipmenbatteryVoltageVo EquipmenbatteryVoltageVo) throws LogicException;
 
     /**
      * @throws LogicException
@@ -49,5 +50,5 @@ public interface EquipmenbatteryVoltageLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenbatteryVoltage(EquipmenbatteryVoltagePo equipmenbatteryVoltagePo) throws LogicException;
+    public ResultBean removeEquipmenbatteryVoltage(EquipmenbatteryVoltageVo EquipmenbatteryVoltageVo) throws LogicException;
 }

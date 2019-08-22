@@ -7,6 +7,7 @@ import com.ctevs.common.query.QueryBean;
 import com.ctevs.common.result.ResultBean;
 import com.ctevs.common.result.ResultPOBean;
 import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.vo.EquipmenlimitVo;
 
 /**
  * Equipmenlimit Logic
@@ -17,27 +18,27 @@ public interface EquipmenlimitLogic {
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenlimitPo> queryEquipmenlimitListByPageCond(QueryBean queryBean) throws LogicException;
+    public ResultPOListBean<EquipmenlimitVo> queryEquipmenlimitListByPageCond(QueryBean queryBean) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenlimitPo> queryEquipmenlimitListByCond(EquipmenlimitPo equipmenlimitPo) throws LogicException;
+    public ResultPOListBean<EquipmenlimitVo> queryEquipmenlimitListByCond(EquipmenlimitVo EquipmenlimitVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenlimitPo> queryEquipmenlimitById(BigInteger id) throws LogicException;
+    public ResultPOBean<EquipmenlimitVo> queryEquipmenlimitById(BigInteger id) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenlimitByPo(EquipmenlimitPo equipmenlimitPo) throws LogicException;
+    public ResultBean modifyEquipmenlimitByPo(EquipmenlimitVo EquipmenlimitVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenlimit(EquipmenlimitPo equipmenlimitPo) throws LogicException;
+    public ResultBean addEquipmenlimit(EquipmenlimitVo EquipmenlimitVo) throws LogicException;
 
     /**
      * @throws LogicException
@@ -47,5 +48,5 @@ public interface EquipmenlimitLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenlimit(EquipmenlimitPo equipmenlimitPo) throws LogicException;
+    public ResultBean removeEquipmenlimit(EquipmenlimitVo EquipmenlimitVo) throws LogicException;
 }

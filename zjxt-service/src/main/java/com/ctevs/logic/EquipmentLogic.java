@@ -7,6 +7,7 @@ import com.ctevs.common.query.QueryBean;
 import com.ctevs.common.result.ResultBean;
 import com.ctevs.common.result.ResultPOBean;
 import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.vo.EquipmentVo;
 
 /**
  * Equipment Logic
@@ -17,27 +18,27 @@ public interface EquipmentLogic {
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmentPo> queryEquipmentListByPageCond(QueryBean queryBean) throws LogicException;
+    public ResultPOListBean<EquipmentVo> queryEquipmentListByPageCond(QueryBean queryBean) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmentPo> queryEquipmentListByCond(EquipmentPo equipmentPo) throws LogicException;
+    public ResultPOListBean<EquipmentVo> queryEquipmentListByCond(EquipmentVo EquipmentVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmentPo> queryEquipmentById(BigInteger id) throws LogicException;
+    public ResultPOBean<EquipmentVo> queryEquipmentById(BigInteger id) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmentByPo(EquipmentPo equipmentPo) throws LogicException;
+    public ResultBean modifyEquipmentByPo(EquipmentVo EquipmentVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipment(EquipmentPo equipmentPo) throws LogicException;
+    public ResultBean addEquipment(EquipmentVo EquipmentVo) throws LogicException;
 
     /**
      * @throws LogicException
@@ -47,5 +48,5 @@ public interface EquipmentLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipment(EquipmentPo equipmentPo) throws LogicException;
+    public ResultBean removeEquipment(EquipmentVo EquipmentVo) throws LogicException;
 }

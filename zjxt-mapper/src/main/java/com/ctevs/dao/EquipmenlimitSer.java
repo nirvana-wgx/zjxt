@@ -2,7 +2,7 @@ package com.ctevs.dao;
 
 import java.util.List;
 
-import com.ctevs.page.QueryBean;
+import com.ctevs.common.query.QueryBean;
 import com.ctevs.po.EquipmenlimitEntity;
 import com.ctevs.vo.EquipmenlimitVo;
 

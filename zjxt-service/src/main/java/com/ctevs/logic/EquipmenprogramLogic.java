@@ -6,6 +6,7 @@ import com.ctevs.common.query.QueryBean;
 import com.ctevs.common.result.ResultBean;
 import com.ctevs.common.result.ResultPOBean;
 import com.ctevs.common.result.ResultPOListBean;
+import com.ctevs.vo.EquipmenprogramVo;
 
 /**
  * Equipmenprogram Logic
@@ -15,27 +16,27 @@ public interface EquipmenprogramLogic {
      /**
      * @throws LogicException 
      */
-    public ResultPOListBean<EquipmenprogramPo> queryEquipmenprogramListByPageCond(QueryBean queryBean) throws LogicException;
+    public ResultPOListBean<EquipmenprogramVo> queryEquipmenprogramListByPageCond(QueryBean queryBean) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOListBean<EquipmenprogramPo> queryEquipmenprogramListByCond(EquipmenprogramPo equipmenprogramPo) throws LogicException;
+    public ResultPOListBean<EquipmenprogramVo> queryEquipmenprogramListByCond(EquipmenprogramVo EquipmenprogramVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultPOBean<EquipmenprogramPo> queryEquipmenprogramById(BigInteger id) throws LogicException;
+    public ResultPOBean<EquipmenprogramVo> queryEquipmenprogramById(BigInteger id) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean modifyEquipmenprogramByPo(EquipmenprogramPo equipmenprogramPo) throws LogicException;
+    public ResultBean modifyEquipmenprogramByPo(EquipmenprogramVo EquipmenprogramVo) throws LogicException;
 
     /**
      * @throws LogicException
      */
-    public ResultBean addEquipmenprogram(EquipmenprogramPo equipmenprogramPo) throws LogicException;
+    public ResultBean addEquipmenprogram(EquipmenprogramVo EquipmenprogramVo) throws LogicException;
 
     /**
      * @throws LogicException
@@ -45,5 +46,5 @@ public interface EquipmenprogramLogic {
     /**
      * @throws LogicException
      */
-    public ResultBean removeEquipmenprogram(EquipmenprogramPo equipmenprogramPo) throws LogicException;
+    public ResultBean removeEquipmenprogram(EquipmenprogramVo EquipmenprogramVo) throws LogicException;
 }

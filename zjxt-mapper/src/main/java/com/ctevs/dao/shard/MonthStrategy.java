@@ -4,8 +4,11 @@ import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
 
+import com.ctevs.common.DateUtil;
+import com.ctevs.common.beans.Vo;
+import com.ctevs.common.query.QueryBean;
 import com.ctevs.po.Entity;
-import com.ctevs.po.Po;
+import com.google.code.shardbatis.strategy.ShardStrategy;
 
 @Component
 public class MonthStrategy implements ShardStrategy {
@@ -43,8 +46,8 @@ public class MonthStrategy implements ShardStrategy {
                 baseTableName=baseTableName+"_"+suffix;
             }
         }
-        else if (params instanceof Po) {
-            Po po =((Po) params);
+        else if (params instanceof Vo) {
+        	Vo po =((Vo) params);
             isShard = po.isShard();
             if(isShard){
                 String suffix =po.getCollectime().substring(0,7).replaceAll("-", "");

@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 
+import com.ctevs.common.beans.Vo;
 import com.ctevs.common.query.QueryBean;
 import com.ctevs.common.result.ResultPOListBean;
 
@@ -22,7 +23,7 @@ public class BeanUtil extends BeanUtils {
         BeanUtils.copyProperties(orig, dest);
     }
     
-    public static void copyProperties2(QueryBean orig, ResultPOListBean<Po> dest) {
+    public static void copyProperties2(QueryBean orig, ResultPOListBean<Vo> dest) {
         dest.setTotalPages(orig.getTotalPages());
         dest.setTotalCount(orig.getTotalCount());
     }

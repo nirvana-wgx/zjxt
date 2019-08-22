@@ -3,6 +3,8 @@ package com.ctevs.vo;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import com.ctevs.common.beans.Vo;
+
 public class EquipmenbatteryVo extends Vo {
 
     /**

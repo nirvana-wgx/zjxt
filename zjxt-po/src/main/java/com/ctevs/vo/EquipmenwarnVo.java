@@ -3,6 +3,8 @@ package com.ctevs.vo;
 import java.math.BigInteger;
 import java.util.Date;
 
+import com.ctevs.common.beans.Vo;
+
 /**
  * EquipmenwarnPo Po
  * @author system

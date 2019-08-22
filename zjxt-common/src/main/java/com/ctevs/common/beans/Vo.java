@@ -1,4 +1,4 @@
-package com.ctevs.vo;
+package com.ctevs.common.beans;
 
 import java.io.Serializable;
 

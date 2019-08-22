@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ctevs.common.beans.Vo;
 
 /**
  * EquipmentPo Po

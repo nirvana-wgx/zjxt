@@ -1,27 +1,13 @@
-package com.ctevs.common;
+package com.ctevs.common.beans;
 
-import java.io.Serializable;
 
-import com.alibaba.fastjson.annotation.JSONField;
- 
-public class Po implements Serializable {
-    private static final long serialVersionUID = -1L;
-    /**
-     *  
-     */
-    @JSONField(serialize = false)
+public class Entity {
     private int limit;
-    /**
-     *  
-     */
-    @JSONField(serialize = false)
     private int offset;
-
-    @JSONField(serialize = false)
     private boolean isShard;
-    
-    private String collectime;
 
+    private String collectime;
+    
     public int getLimit() {
         return this.limit;
     }
@@ -54,9 +40,6 @@ public class Po implements Serializable {
         this.collectime = collectime;
     }
 
-     
-
-    
     
     
 }

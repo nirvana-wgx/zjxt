@@ -1,6 +1,6 @@
  package com.ctevs.common.exception;
 
-import com.ctevs.po.ExceptionBean;
+import com.ctevs.common.beans.ExceptionBean;
 
 
 public class LogicException extends BaseException {

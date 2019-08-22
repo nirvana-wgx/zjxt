@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ctevs.common.beans.Vo;
 
 public class EquipmentDataVo extends Vo {
     /** 

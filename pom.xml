@@ -22,7 +22,7 @@
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven.compile.source>1.7</maven.compile.source>
         <maven.compile.target>1.7</maven.compile.target>
-        <spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+        <spring.boot.version>2.5.12</spring.boot.version>
         <cxf.version>3.1.6</cxf.version>
         <junit.version>4.12</junit.version>
         <oracle.version>12</oracle.version>

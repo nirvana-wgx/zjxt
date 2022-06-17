@@ -28,7 +28,7 @@
         <oracle.version>12</oracle.version>
         <spring.kafka.version>1.3.1.RELEASE</spring.kafka.version>
         <mybatis.spring.boot.version>1.1.1</mybatis.spring.boot.version>
-        <fastjson.version>1.2.31</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
     
     <dependencies>
